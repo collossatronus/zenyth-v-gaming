@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://collossatronus.github.io/zenyth-v-gaming/sitemap.xml

@@ -4,95 +4,781 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071426">
-  <meta name="description" content="Zenyth_V Gaming — retrouve les lives, clips et actualités de la chaîne Twitch.">
-  <title>Zenyth_V Gaming | Streamer</title>
+  <meta name="description" content="Zenyth_V Gaming : passionné de The Crew 2, Need for Speed, No Man’s Sky et Starfield. Lives, setup, clips TikTok et communauté gaming.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="ZENYTH_V Gaming">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ZENYTH_V Gaming | Courses, exploration et lives">
+  <meta property="og:description" content="The Crew 2, Need for Speed, No Man’s Sky et Starfield : découvre les jeux, le setup et la communauté Zenyth_V.">
+  <link rel="canonical" href="https://collossatronus.github.io/zenyth-v-gaming/">
+  <meta property="og:url" content="https://collossatronus.github.io/zenyth-v-gaming/">
+  <meta property="og:image" content="https://collossatronus.github.io/zenyth-v-gaming/assets/images/435.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ZENYTH_V Gaming | Lives & communauté">
+  <meta name="twitter:description" content="Courses, exploration spatiale et gaming en communauté avec Zenyth_V.">
+  <title>ZENYTH_V Gaming | Streamer gaming, lives & communauté</title>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Zenyth_V",
+      "url": "https://collossatronus.github.io/zenyth-v-gaming/",
+      "alternateName": "ZENYTH_V Gaming",
+      "description": "Créateur gaming passionné de jeux de course, d’exploration spatiale et de streaming communautaire.",
+      "sameAs": [
+        "https://www.twitch.tv/Zenyth_V",
+        "https://www.youtube.com/@Zenyth_V",
+        "https://www.tiktok.com/@.matth_f.g_",
+        "https://discord.gg/x7bpXeksh"
+      ]
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#050b16;--panel:#0b1729;--blue:#28a8ff;--cyan:#73e2ff;--white:#f3f8ff;--muted:#a8bbd3}
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(ellipse at 50% -10%,#123c70 0,transparent 45%),var(--bg);color:var(--white);font-family:Inter,Segoe UI,Arial,sans-serif;line-height:1.6}
+    :root{color-scheme:dark;--bg:#050910;--panel:#0b1421;--blue:#28a8ff;--cyan:#8aeaff;--white:#f3f8ff;--muted:#9aaec5;--line:#6bbdff30;--red:#ff5364}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    body{margin:0;background:radial-gradient(ellipse at 75% 4%,#0c3150 0,transparent 34%),linear-gradient(180deg,#070d17,#050910 68%);color:var(--white);font-family:Manrope,Segoe UI,sans-serif;line-height:1.65}
     a{color:inherit;text-decoration:none}
-    .wrap{width:min(1120px,92%);margin:auto}
-    header{position:sticky;top:0;z-index:5;background:#050b16dc;backdrop-filter:blur(14px);border-bottom:1px solid #ffffff12}
-    nav{display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:72px}
-    .logo{font-weight:900;letter-spacing:1px;font-size:1.2rem}.logo span{color:var(--blue)}
-    .navlinks{display:flex;gap:22px;color:var(--muted);font-size:.95rem}.navlinks a:hover{color:white}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 19px;border-radius:10px;font-weight:800;background:linear-gradient(110deg,#0879ef,#28c5ff);color:#00101e;box-shadow:0 0 28px #168fff38;transition:.2s}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 0 36px #168fff65}
-    .btn.outline{background:transparent;color:var(--white);border:1px solid #329dff88;box-shadow:none}
-    .hero{min-height:590px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;padding:90px 0 80px}
-    .hero:before,.hero:after{content:"";position:absolute;pointer-events:none;filter:drop-shadow(0 0 15px #16a6ff)}
-    .hero:before{width:4px;height:250px;background:linear-gradient(transparent,var(--cyan),transparent);transform:rotate(32deg);left:12%;top:5%;opacity:.7}
-    .hero:after{width:4px;height:210px;background:linear-gradient(transparent,var(--blue),transparent);transform:rotate(-28deg);right:14%;bottom:2%;opacity:.65}
-    .eyebrow{display:inline-block;border:1px solid #39aaff60;border-radius:999px;padding:6px 13px;color:var(--cyan);font-size:.82rem;letter-spacing:2px;text-transform:uppercase;background:#0d2441a8}
-    h1{font-size:clamp(3rem,9vw,6.7rem);line-height:.98;margin:22px 0;font-weight:950;letter-spacing:-3px;text-shadow:0 0 35px #168fff38}
-    h1 span{display:block;color:var(--blue);text-shadow:0 0 28px #168fff72}
-    .hero p{max-width:620px;margin:0 auto 28px;color:var(--muted);font-size:1.12rem}
-    .actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
-    section{padding:70px 0}.section-head{text-align:center;margin-bottom:30px}
-    .kicker{color:var(--cyan);text-transform:uppercase;letter-spacing:3px;font-size:.78rem;font-weight:800}
-    h2{font-size:clamp(2rem,5vw,3rem);margin:8px 0 10px;line-height:1.1}
-    .section-head p{color:var(--muted);margin:0}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{padding:25px;border:1px solid #6bbdff22;border-radius:18px;background:linear-gradient(145deg,#0c1c32,#07111f);min-height:180px}
-    .card .icon{font-size:2rem}.card h3{margin:10px 0 6px}.card p{color:var(--muted);margin:0}
-    .streambox{padding:28px;border-radius:22px;border:1px solid #268fff50;background:linear-gradient(135deg,#0c1b31,#08111f);display:grid;grid-template-columns:1.3fr 1fr;gap:28px;align-items:center}
-    .screen{aspect-ratio:16/9;border-radius:14px;border:1px solid #4dbdff55;background:radial-gradient(ellipse at center,#103d6c,#050b16 70%);display:grid;place-items:center;text-align:center;padding:20px}
-    .play{font-size:3rem;line-height:1}.screen strong{display:block;margin-top:12px}
-    .streambox p{color:var(--muted)}
-    .community{text-align:center;border-radius:22px;padding:48px 22px;background:linear-gradient(120deg,#09244a,#0a1530 55%,#102e4a);border:1px solid #41b5ff38}
-    footer{padding:28px 0;border-top:1px solid #ffffff12;color:var(--muted);font-size:.88rem}
+    button,input,select{font:inherit}
+    .wrap{width:min(1180px,calc(100% - 48px));margin:auto}
+    .topline{height:31px;background:#0c1927;border-bottom:1px solid #8aeaff18;color:#aec7dd;font-size:.68rem;font-weight:800;letter-spacing:1.5px;text-align:center;text-transform:uppercase}
+    .topline .wrap{height:100%;display:flex;align-items:center;justify-content:center;gap:10px}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red);animation:live-pulse 1.4s ease-in-out infinite}
+    header{position:sticky;top:0;z-index:10;background:#050910e8;backdrop-filter:blur(16px);border-bottom:1px solid #9adfff1c}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:74px}
+    .logo{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:1.75rem;line-height:1}
+    .logo span{color:var(--blue);text-shadow:0 0 18px #168fff9c}
+    .navlinks{display:flex;gap:26px;color:var(--muted);font-size:.84rem;font-weight:800}
+    .navlinks a{transition:color .2s ease}
+    .navlinks a:hover,.navlinks a:focus-visible{color:var(--cyan)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:11px 19px;border:1px solid transparent;border-radius:4px;font-weight:800;background:linear-gradient(110deg,#0879ef,#35c8ff);color:#00101e;box-shadow:0 8px 28px #168fff30;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 10px 34px #168fff60}
+    .btn:focus-visible,.navlinks a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+    .btn.outline{background:#091321c9;color:var(--white);border-color:#329dff77;box-shadow:none}
+    .hero{position:relative;isolation:isolate;overflow:hidden;padding:68px 0 76px;background-image:linear-gradient(#80cfff0a 1px,transparent 1px),linear-gradient(90deg,#80cfff0a 1px,transparent 1px);background-size:44px 44px}
+    .hero:before{content:"";position:absolute;z-index:-1;left:36%;top:0;width:42vw;height:42vw;max-width:620px;max-height:620px;border-radius:50%;background:#0879ef1a;filter:blur(110px);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:42px;min-height:480px}
+    .hero-copy{position:relative;z-index:1}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid #39aaff60;border-radius:3px;padding:6px 13px;color:var(--cyan);font-size:.7rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;background:#0d2441c7}
+    .eyebrow:before{content:"";width:7px;height:7px;background:var(--blue);box-shadow:0 0 12px var(--blue);transform:rotate(45deg)}
+    h1,h2,h3{font-family:"Barlow Condensed",Impact,sans-serif;text-transform:uppercase}
+    h1{font-size:5.6rem;line-height:.82;margin:25px 0 20px;font-weight:900}
+    h1 span{display:block;margin-top:12px;color:var(--blue);text-shadow:0 0 35px #168fff72}
+    .hero-copy>p{max-width:510px;margin:0 0 26px;color:#b6c6d9;font-size:1rem}
+    .actions{display:flex;flex-wrap:wrap;gap:12px}
+    .hero-note{display:flex;align-items:center;gap:10px;margin-top:28px;color:#95abc2;font-size:.72rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+    .hero-note span{width:30px;height:1px;background:var(--blue);box-shadow:0 0 10px var(--blue)}
+    .hero-visual{position:relative;display:grid;place-items:center;min-height:450px;overflow:hidden;border:1px solid #69caff42;background:radial-gradient(ellipse at 50% 46%,#14548c66,transparent 52%),linear-gradient(145deg,#0c1b2b,#060b13 75%);clip-path:polygon(0 0,100% 0,100% 88%,92% 100%,0 100%)}
+    .hero-visual:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#81d7ff0a 1px,transparent 1px),linear-gradient(90deg,#81d7ff0a 1px,transparent 1px);background-size:28px 28px;mask-image:radial-gradient(ellipse,#000 10%,transparent 75%)}
+    .hero-visual:after{content:"";position:absolute;width:74%;height:74%;border:1px solid #63caff26;transform:rotate(45deg);box-shadow:0 0 65px #168fff1c,inset 0 0 55px #168fff12}
+    .hero-z{position:relative;z-index:1;font-family:"Barlow Condensed",sans-serif;font-size:21rem;font-weight:900;line-height:.8;color:#eafaff;text-shadow:0 0 20px #51caff9c,0 0 90px #0879efab;transform:skewX(-8deg)}
+    .hero-bolt{position:absolute;z-index:2;width:100px;height:175px;top:20%;left:21%;background:linear-gradient(155deg,#fff,#70ddff 32%,#0879ef 70%);clip-path:polygon(55% 0,100% 0,70% 39%,96% 39%,12% 100%,38% 54%,4% 54%);filter:drop-shadow(0 0 24px #28a8ff);animation:bolt-float 3.6s ease-in-out infinite alternate}
+    .visual-label{position:absolute;z-index:3;padding:7px 10px;border:1px solid #77d6ff35;background:#07111dda;color:#a9cae0;font-size:.61rem;font-weight:800;letter-spacing:1.3px;text-transform:uppercase}
+    .visual-label.top{top:22px;left:22px}.visual-label.bottom{right:22px;bottom:22px;color:var(--cyan)}
+    .visual-crosshair{position:absolute;z-index:3;right:25%;top:25%;width:13px;height:13px;border:1px solid var(--cyan);transform:rotate(45deg);box-shadow:0 0 14px var(--blue)}
+    .ticker{overflow:hidden;border-block:1px solid #81d7ff20;background:#091421;padding:12px 0;color:#94abc1;font-family:"Barlow Condensed",sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+    .ticker-track{display:flex;width:max-content;animation:ticker-slide 32s linear infinite}
+    .ticker-track span{padding:0 23px}.ticker-track b{color:var(--blue);font-weight:900}
+    .metrics{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #ffffff12}
+    .metric{padding:25px 18px;text-align:center;border-right:1px solid #ffffff12}
+    .metric:last-child{border:0}.metric strong{display:block;color:var(--cyan);font-family:"Barlow Condensed",sans-serif;font-size:1.55rem;text-transform:uppercase}.metric span{color:var(--muted);font-size:.76rem}
+    section{padding:88px 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:30px}
+    .kicker{color:var(--cyan);text-transform:uppercase;letter-spacing:2px;font-size:.7rem;font-weight:800}
+    h2{font-size:3rem;margin:8px 0 0;line-height:.95}
+    .section-head p{max-width:390px;margin:0;color:var(--muted);font-size:.9rem}
+    .games{background:linear-gradient(180deg,transparent,#09111c 18%,#09111c 82%,transparent)}
+    .game-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .game-card{position:relative;display:flex;min-height:250px;flex-direction:column;justify-content:space-between;overflow:hidden;padding:22px;border:1px solid var(--line);background:radial-gradient(ellipse at 80% 20%,var(--glow,#167fff32),transparent 48%),linear-gradient(145deg,#101c2b,#080e17 76%);transition:transform .22s ease,border-color .22s ease}
+    .game-card:before{content:attr(data-number);position:absolute;right:4px;bottom:-42px;color:#ffffff08;font-family:"Barlow Condensed",sans-serif;font-size:12rem;font-weight:900;line-height:1}
+    .game-card:hover{transform:translateY(-5px);border-color:#61caff75}
+    .game-top{display:flex;align-items:center;justify-content:space-between;color:#94abc1;font-size:.68rem;font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+    .game-symbol{font-size:2.2rem;filter:drop-shadow(0 0 12px var(--glow,#168fff))}
+    .game-card h3{position:relative;margin:18px 0 4px;font-size:2.1rem;line-height:.95}
+    .game-card p{position:relative;margin:0;color:var(--muted);font-size:.85rem}
+    .game-open{position:relative;align-self:flex-start;margin-top:17px;padding:8px 11px;border:1px solid #79d8ff66;background:#071321db;color:#c9f3ff;font-size:.7rem;font-weight:900;cursor:pointer}
+    .game-open:hover{border-color:#dff9ff;background:#0d2940}
+    .game-dialog{width:min(650px,calc(100% - 28px));max-height:88vh;padding:0;overflow:auto;border:1px solid #70d7ff9c;background:#081321;color:var(--white);box-shadow:0 0 80px #168fff55}
+    .game-dialog::backdrop{background:#02060ddf;backdrop-filter:blur(8px)}
+    .game-dialog-shell{position:relative;overflow:hidden;padding:clamp(20px,5vw,34px);background:radial-gradient(ellipse at 100% 0,#124a6a65,transparent 45%),linear-gradient(145deg,#10243a,#07101b 75%)}
+    .game-dialog-top{display:flex;justify-content:space-between;gap:16px;align-items:start}
+    .game-dialog h2{margin:6px 0 8px;font-size:3rem}
+    .game-dialog-close{width:40px;height:40px;border:1px solid #65c9ff55;background:#0a1a29;color:#eaf8ff;font-size:1.5rem;cursor:pointer}
+    .game-dialog-description{color:#bed1e3;font-size:.9rem}
+    .game-tips{display:grid;gap:10px;margin:20px 0;padding:0;list-style:none}
+    .game-tips li{position:relative;padding:12px 14px 12px 34px;border:1px solid #65caff24;background:#0a1724;color:#d8e7f4;font-size:.82rem}
+    .game-tips li:before{content:"✦";position:absolute;left:13px;color:#83ddff}
+    .social-icon[data-platform="twitch"]{color:#9146ff;border-color:#9146ff80;background:#211438}
+    .social-icon[data-platform="tiktok"]{color:#25f4ee;border-color:#25f4ee77;background:#10272b;box-shadow:3px 0 12px #fe2c5555}
+    .social-icon[data-platform="discord"]{color:#8d98ff;border-color:#5865f280;background:#1b2042}
+    .social-icon[data-platform="youtube"]{color:#ff4b55;border-color:#ff3b4680;background:#35161d}
+    .social-icon[data-platform="xbox"]{color:#54d66a;border-color:#107c1080;background:#102a19}
+    .social-icon[data-platform="instagram"]{color:#ff7b9c;border-color:#e4405f80;background:#321622}
+    .social-icon[data-platform="steam"]{color:#75d5ff;border-color:#00adee80;background:#0c2538}
+    .live-layout{display:grid;grid-template-columns:1fr;gap:28px;align-items:center}
+    .live-players{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+    .live-platform{min-width:0}
+    .live-platform-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;color:#dcefff;font-size:.76rem;font-weight:800;text-transform:uppercase}
+    .live-platform-top span{display:flex;align-items:center;gap:8px}
+    .live-platform-top span:before{content:"";width:7px;height:7px;border-radius:50%;background:#67d3ff;box-shadow:0 0 12px #49baff}
+    .live-platform-top a{color:#8bdcff;font-size:.7rem}
+    .live-copy{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:32px}
+    .live-copy .kicker,.live-copy h2,.live-copy p{grid-column:1}
+    .live-copy .live-actions{grid-column:2;grid-row:1 / span 3;min-width:290px}
+    .screen{position:relative;display:grid;place-items:center;aspect-ratio:16/9;overflow:hidden;border:1px solid #4dbdff55;background:linear-gradient(#58caff0a 1px,transparent 1px),linear-gradient(90deg,#58caff0a 1px,transparent 1px),radial-gradient(ellipse at center,#103d6c,#050b16 72%);background-size:24px 24px,24px 24px,auto;box-shadow:0 24px 70px #0008}
+    .screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+    .screen:before,.screen:after{content:"";position:absolute;width:22px;height:22px;border-color:var(--cyan);border-style:solid;opacity:.7}
+    .screen:before{top:12px;left:12px;border-width:1px 0 0 1px}.screen:after{right:12px;bottom:12px;border-width:0 1px 1px 0}
+    .screen-content{text-align:center}.play{color:var(--cyan);font-size:3.5rem;line-height:1;filter:drop-shadow(0 0 16px #28a8ff)}
+    .screen strong{display:block;margin-top:13px;font-family:"Barlow Condensed",sans-serif;font-size:1.6rem;text-transform:uppercase}
+    .screen span{color:#a8bbd3;font-size:.75rem}
+    .live-copy h2{margin:10px 0 16px}.live-copy p{margin:0 0 23px;color:var(--muted);font-size:.93rem}
+    .live-actions{display:grid;gap:9px;margin-top:22px}
+    .live-actions .btn{justify-content:flex-start;width:100%}
+    .section-social{background:#080f19;border-block:1px solid #ffffff0c}
+    .social-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .social-card{position:relative;display:flex;align-items:center;gap:14px;min-width:0;padding:17px;border:1px solid #6bbdff24;background:linear-gradient(125deg,#0e1a29,#09111c);transition:border-color .2s ease,transform .2s ease}
+    .social-card:hover{transform:translateY(-3px);border-color:#55c3ff80}
+    .social-icon{display:grid;flex:none;place-items:center;width:44px;height:44px;border:1px solid #55c3ff50;background:#0c2a45;color:var(--cyan);font-family:"Barlow Condensed",sans-serif;font-size:1.35rem;font-weight:900;animation:signal-pulse 4s ease-in-out infinite}
+    .social-icon img{display:block;width:24px;height:24px;object-fit:contain}
+    .social-copy{min-width:0;flex:1}.social-copy strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.9rem}.social-copy span{display:block;color:var(--muted);font-size:.7rem}
+    .social-arrow{color:var(--blue);font-size:1.2rem}.social-remove{position:absolute;top:4px;right:6px;width:24px;height:24px;border:0;background:transparent;color:#90a8bf;font-size:1rem;cursor:pointer;opacity:.65}.social-remove:hover{color:#ff7681;opacity:1}
+    .social-empty{grid-column:1/-1;padding:24px;border:1px dashed #6bbdff40;color:var(--muted);text-align:center;font-size:.9rem}
+    .link-manager{margin-top:20px;border:1px solid #6bbdff28;background:#0a1420}
+    .link-manager summary{padding:15px 18px;color:var(--cyan);font-size:.85rem;font-weight:800;cursor:pointer;list-style:none}
+    .link-manager summary::-webkit-details-marker{display:none}.link-manager summary:after{content:"+";float:right;font-size:1.2rem}.link-manager[open] summary:after{content:"−"}
+    .link-form{display:grid;grid-template-columns:1fr 1.5fr 1.5fr auto;gap:10px;padding:0 18px 18px}
+    .link-form label{display:grid;gap:5px;color:#a7bdd1;font-size:.68rem;font-weight:800;text-transform:uppercase}
+    .link-form input,.link-form select{width:100%;min-height:44px;padding:9px 10px;border:1px solid #6bbdff30;border-radius:3px;background:#050b13;color:var(--white);font-size:.8rem}
+    .link-form .btn{align-self:end;min-height:44px;padding-inline:14px}
+    .manager-note,.form-message{margin:0;padding:0 18px 16px;color:#8499ae;font-size:.72rem}.form-message{color:var(--cyan)}
+    .community{position:relative;overflow:hidden;padding:55px 26px;border:1px solid #41b5ff38;background:linear-gradient(110deg,#09244a,#0a1424 56%,#102c43);text-align:center}
+    .community:before,.community:after{content:"";position:absolute;width:220px;height:150px;border:1px solid #61c8ff2a;transform:rotate(35deg);box-shadow:0 0 45px #168fff12}
+    .community:before{right:-110px;top:-100px}.community:after{left:-130px;bottom:-115px}
+    .community h2{position:relative;margin:9px 0 15px}.community p{position:relative;max-width:590px;margin:0 auto 24px;color:#c0d1e5}
+    footer{padding:28px 0;border-top:1px solid #ffffff12;color:var(--muted);font-size:.78rem}
     footer .foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-    @media(max-width:760px){.navlinks{display:none}.cards{grid-template-columns:1fr}.streambox{grid-template-columns:1fr}.hero{min-height:520px}h1{letter-spacing:-1.5px}.streambox{padding:17px}}
+    @keyframes bolt-float{from{transform:translateY(-7px) rotate(-3deg)}to{transform:translateY(8px) rotate(3deg)}}
+    @keyframes hero-drift{from{transform:scale(1.01);filter:brightness(.60) saturate(1.12) contrast(1.08)}to{transform:scale(1.06);filter:brightness(.69) saturate(1.2) contrast(1.08)}}
+    @keyframes lightning-flash{0%,34%,37%,100%{opacity:.16;transform:translateX(0)}35%,36%{opacity:.8;transform:translateX(5px)}}
+    @keyframes signal-pulse{0%,100%{box-shadow:0 0 0 #28a8ff00}50%{box-shadow:0 0 16px #28a8ff55}}
+    @keyframes frame-surge{0%,100%{border-color:#71cfff73;filter:drop-shadow(0 0 3px #28a8ff35)}50%{border-color:#e4fbff;filter:drop-shadow(0 0 9px #28a8ffb0)}}
+    @keyframes live-pulse{50%{opacity:.45;box-shadow:0 0 3px var(--red)}}
+    @keyframes ticker-slide{to{transform:translateX(-50%)}}
+    @media(max-width:900px){.hero-grid{gap:22px}.hero-visual{min-height:390px}.hero-z{font-size:17rem}h1{font-size:4.6rem}.navlinks{gap:14px}.live-layout{gap:26px}.social-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:680px){.wrap{width:min(100% - 32px,520px)}.topline{font-size:.58rem;letter-spacing:1px}.topline .wrap{gap:7px}nav{min-height:66px}.navlinks{display:none}.nav-cta{min-height:42px;padding:8px 12px;font-size:.78rem}.hero{padding:50px 0 54px}.hero-grid{grid-template-columns:1fr;gap:30px;min-height:0}.hero-copy{text-align:center}.hero-copy>p{margin-inline:auto}.actions{justify-content:center}.hero-note{justify-content:center;margin-top:20px}h1{font-size:4.1rem}.hero-visual{min-height:310px}.hero-z{font-size:14rem}.hero-bolt{width:70px;height:125px;left:17%;top:19%}.visual-label.top{top:14px;left:14px}.visual-label.bottom{right:14px;bottom:14px}.metrics{grid-template-columns:1fr}.metric{display:flex;align-items:center;justify-content:space-between;padding:13px 6px;text-align:left;border-right:0;border-bottom:1px solid #ffffff12}.metric:last-child{border-bottom:0}.metric strong{font-size:1.25rem}section{padding:64px 0}.section-head{display:block}.section-head p{margin-top:12px}h2{font-size:2.55rem}.game-grid,.social-grid{grid-template-columns:1fr}.game-card{min-height:205px}.live-layout{grid-template-columns:1fr;gap:28px}.link-form{grid-template-columns:1fr}.link-form .btn{width:100%}.community{padding:42px 18px}.foot{flex-direction:column}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+    .hero{min-height:670px;display:flex;align-items:center;padding:100px 0 90px;background:none}
+    .hero:before{inset:0;left:0;top:0;z-index:-1;width:auto;height:auto;max-width:none;max-height:none;border-radius:0;background:linear-gradient(90deg,#030812ed 0%,#06101bd9 38%,#07142673 68%,#07142652 100%);filter:none}
+    .hero-backdrop{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 48%;filter:brightness(.63) saturate(1.16) contrast(1.08);animation:hero-drift 24s ease-in-out infinite alternate}
+    .hero:after{content:"";position:absolute;z-index:0;top:14%;right:8%;width:112px;height:214px;background:linear-gradient(155deg,#fff 0%,#d7f7ff 24%,#48baff 68%,#0879ef);clip-path:polygon(55% 0,100% 0,69% 38%,96% 38%,12% 100%,38% 54%,4% 54%);filter:drop-shadow(0 0 20px #48baff);opacity:.24;animation:lightning-flash 7s steps(1,end) infinite}
+    .hero-grid{display:block;min-height:0}
+    .hero-copy{max-width:620px}
+    .hero h1{color:#f3f8ff;text-shadow:0 4px 28px #0009}
+    .hero h1 span{color:#53baff;text-shadow:0 0 26px #168fff9c}
+    .hero-copy>p{color:#d1e2f2}
+    .hero-note{color:#c0d5e8}
+    .hero-bolt{left:auto;right:13%;top:16%;width:74px;height:142px;opacity:.85;background:linear-gradient(155deg,#fff 0%,#c9f5ff 28%,#35aaff 72%);filter:drop-shadow(0 0 16px #28a8ff)}
+    .hero-bolt-secondary{right:27%;top:67%;width:35px;height:68px;opacity:.65;animation-delay:.7s}
+    .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .setup-shot{position:relative;isolation:isolate;overflow:visible;aspect-ratio:4/5;margin:0;border:0;background:transparent}
+    .setup-shot img{position:relative;z-index:0;display:block;width:100%;height:100%;border:1px solid #70cfff48;object-fit:cover;filter:brightness(.72) saturate(1.08);transition:filter .3s ease,transform .5s ease}
+    .setup-shot:hover img{filter:brightness(.84) saturate(1.12);transform:scale(1.025)}
+    .setup-shot:before{content:"";position:absolute;z-index:3;inset:-8px;border:1px solid #8be5ffb5;clip-path:polygon(0 0,36% 0,39% 2%,63% 2%,66% 0,100% 0,100% 35%,98% 39%,100% 43%,100% 100%,65% 100%,62% 98%,38% 98%,35% 100%,0 100%,0 62%,2% 58%,0 54%);pointer-events:none;animation:frame-surge 5s ease-in-out infinite}
+    .setup-shot:after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,transparent 52%,#030914d9 100%);pointer-events:none}
+    .setup-shot figcaption{position:absolute;z-index:4;right:18px;bottom:17px;left:18px;display:flex;align-items:end;justify-content:space-between;gap:10px;color:#f3f8ff}
+    .setup-shot figcaption strong{font-family:"Barlow Condensed",sans-serif;font-size:1.45rem;text-transform:uppercase}
+    .setup-shot figcaption span{color:#9adfff;font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+    .setup-shot figcaption:before{content:"";position:absolute;left:0;top:-12px;width:34px;height:2px;background:linear-gradient(90deg,#fff,#28a8ff);box-shadow:0 0 12px #28a8ff}
+    .setup-section{position:relative;isolation:isolate;background-color:#090f17;background-image:repeating-linear-gradient(135deg,transparent 0 36px,#c9d9e608 36px 37px),linear-gradient(#70cfff07 1px,transparent 1px),linear-gradient(90deg,#70cfff07 1px,transparent 1px);background-size:auto,48px 48px,48px 48px;border-block:1px solid #ffffff10}
+    .setup-section:before{content:"ZENYTH_V // EQUIPMENT BAY";position:absolute;z-index:-1;top:24px;right:3%;color:#d8e6f20c;font-family:"Barlow Condensed",sans-serif;font-size:3.4rem;font-weight:900;pointer-events:none}
+    .photo-bolt{position:absolute;z-index:4;width:25px;height:49px;background:linear-gradient(155deg,#fff 0%,#d5f7ff 28%,#2aa9ff 74%);clip-path:polygon(55% 0,100% 0,69% 38%,96% 38%,12% 100%,38% 54%,4% 54%);filter:drop-shadow(0 0 11px #42bcff);pointer-events:none;animation:lightning-flash 6s steps(1,end) infinite}
+    .photo-bolt-left{left:-15px;top:24%}
+    .photo-bolt-right{right:-12px;bottom:28%;width:19px;height:39px;animation-delay:1.7s}
+    .discord-hub{position:relative;isolation:isolate;overflow:hidden;padding:82px 0;background-color:#070d16;background-image:linear-gradient(#5ccaff08 1px,transparent 1px),linear-gradient(90deg,#5ccaff08 1px,transparent 1px);background-size:34px 34px;border-block:1px solid #48bdff20}
+    .discord-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+    .discord-panel{position:relative;min-height:310px;overflow:hidden;border:1px solid #69cfff48;background:linear-gradient(145deg,#102a42,#07101a);box-shadow:0 18px 50px #0006}
+    .discord-banner-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.38) saturate(1.25);transition:transform .7s ease,filter .5s ease}
+    .discord-server:hover .discord-banner-img{transform:scale(1.05);filter:brightness(.48) saturate(1.35)}
+    .discord-server:before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,#050b14ee 0%,#06101ac9 58%,#07142670 100%),linear-gradient(0deg,#050b14dd,transparent 58%)}
+    .discord-panel-content{position:relative;z-index:2;display:flex;min-height:310px;flex-direction:column;justify-content:end;align-items:flex-start;padding:25px}
+    .discord-mark-row{display:flex;align-items:center;gap:15px}
+    .discord-server-icon{display:block;width:64px;height:64px;flex:none;border:1px solid #9ce8ff8a;border-radius:14px;object-fit:cover;box-shadow:0 0 28px #168fff72}
+    .discord-panel h3{margin:4px 0 0;font-size:1.8rem;line-height:1}
+    .discord-panel-content>p,.discord-profile>p{max-width:490px;margin:17px 0 0;color:#c1d4e7;font-size:.84rem}
+    .discord-panel .btn{margin-top:20px}
+    .discord-profile{display:flex;flex-direction:column;justify-content:space-between;padding:26px;background:linear-gradient(145deg,#12263a,#080e18 68%)}
+    .discord-profile:before{content:"";position:absolute;top:-38px;right:-22px;width:180px;height:230px;background:linear-gradient(155deg,#fff 0%,#c5f2ff 26%,#28a8ff 75%);clip-path:polygon(56% 0,100% 0,70% 38%,96% 38%,12% 100%,38% 54%,4% 54%);filter:drop-shadow(0 0 18px #28a8ff);opacity:.14;animation:bolt-float 4s ease-in-out infinite alternate}
+    .discord-profile-top{position:relative;z-index:1;display:flex;align-items:center;gap:16px}
+    .discord-profile-avatar{width:82px;height:82px;flex:none;border:2px solid #bdefff;border-radius:50%;object-fit:cover;box-shadow:0 0 0 5px #28a8ff24,0 0 30px #28a8ff6b}
+    .discord-profile .kicker{color:#9adfff}
+    .discord-profile h3{font-size:2rem}
+    .discord-profile>p{position:relative;z-index:1}
+    .discord-profile .btn{position:relative;z-index:1;align-self:flex-start}
+    .community-fab{position:fixed;right:22px;bottom:22px;z-index:12;display:flex;align-items:center;gap:10px;min-height:50px;padding:0 18px;border:1px solid #b5edff88;border-radius:4px;background:linear-gradient(110deg,#0879ef,#35c8ff);color:#03101b;font-weight:900;box-shadow:0 0 28px #168fff70;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+    .community-fab:hover{transform:translateY(-3px);box-shadow:0 0 40px #168fffaa}
+    .community-fab span{display:grid;place-items:center;width:24px;height:24px;border:1px solid #03101b70;border-radius:50%;font-family:"Barlow Condensed",sans-serif}
+    .community-dialog{width:min(600px,calc(100% - 28px));max-height:min(86vh,760px);padding:0;overflow:auto;border:1px solid #5bcaff7a;border-radius:6px;background:#081321;color:var(--white);box-shadow:0 0 70px #168fff42}
+    .community-dialog::backdrop{background:#02060dd9;backdrop-filter:blur(8px)}
+    .dialog-shell{position:relative;overflow:hidden;padding:28px;background:linear-gradient(145deg,#10243a,#07101b 70%)}
+    .dialog-shell:before{content:"";position:absolute;top:-42px;right:35px;width:44px;height:108px;background:linear-gradient(#fff,#6ed8ff,#0879ef);clip-path:polygon(55% 0,100% 0,69% 38%,96% 38%,12% 100%,38% 54%,4% 54%);filter:drop-shadow(0 0 16px #28a8ff);opacity:.55;animation:bolt-float 3s ease-in-out infinite alternate}
+    .dialog-title-row{position:relative;display:flex;align-items:start;justify-content:space-between;gap:18px}
+    .dialog-title-row h2{margin:8px 0 0;font-size:2.8rem}
+    .dialog-close{margin:0}.dialog-close button{width:38px;height:38px;border:1px solid #65c9ff55;background:#0a1a29;color:#eaf8ff;font-size:1.55rem;cursor:pointer}
+    .dialog-intro{position:relative;max-width:490px;margin:14px 0 23px;color:#b9cde0;font-size:.9rem}
+    .dialog-actions{position:relative;display:grid;gap:10px}.dialog-actions .btn{justify-content:flex-start;width:100%}
+    .dialog-moderation{position:relative;margin-top:26px;padding-top:20px;border-top:1px solid #69cbff2a}
+    .dialog-moderation h3{margin:0 0 7px;font-size:1.5rem}.dialog-moderation p{margin:0 0 15px;color:#9fb4c9;font-size:.78rem}
+    .dialog-moderation-links{display:flex;flex-wrap:wrap;gap:9px}.dialog-moderation-links .btn{min-height:42px;padding:9px 13px;font-size:.78rem}
+    .mascot-wrap{position:fixed;left:16px;top:calc(100vh - 176px);z-index:14;width:112px;height:154px;pointer-events:none;transition:left 2s cubic-bezier(.2,.8,.2,1),top 2s cubic-bezier(.2,.8,.2,1)}
+    .mascot-bubble{position:absolute;z-index:2;left:50%;bottom:calc(100% - 4px);width:max-content;max-width:210px;padding:8px 11px;border:1px solid #83ddff70;background:#071421ed;color:#eaf9ff;font-size:.72rem;font-weight:800;opacity:0;transform:translate(-50%,8px);transition:opacity .22s ease,transform .22s ease;pointer-events:none}
+    .mascot-wrap.is-speaking .mascot-bubble{opacity:1;transform:translate(-50%,0)}
+    .mascot-button{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:pointer;pointer-events:auto;filter:drop-shadow(0 7px 16px #168fff55);animation:mascot-float 3s ease-in-out infinite}
+    .mascot-button:focus-visible{outline:2px solid #d9f8ff;outline-offset:4px}
+    .mascot-orbit{position:absolute;inset:16px 9px 15px;border:1px solid #70d9ff64;border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 20px #168fff20;animation:mascot-orbit 8s linear infinite}
+    .mascot-antenna{position:absolute;top:21px;left:55px;width:3px;height:15px;background:#c9f5ff;box-shadow:0 0 9px #28a8ff}
+    .mascot-antenna:after{content:"";position:absolute;top:-5px;left:-3px;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 13px #45c6ff;animation:signal-pulse 2.6s ease-in-out infinite}
+    .mascot-head{position:absolute;top:34px;left:25px;width:62px;height:52px;border:2px solid #d9f8ff;border-radius:19px 19px 15px 15px;background:linear-gradient(145deg,#e9fbff 0%,#8edfff 22%,#14344c 24%,#081521 100%);box-shadow:inset 0 0 14px #54bdff55,0 0 17px #28a8ff72;transition:transform .22s ease}
+    .mascot-eye{position:absolute;top:18px;width:8px;height:10px;border-radius:50%;background:#9df3ff;box-shadow:0 0 10px #51d7ff;animation:mascot-blink 5s ease-in-out infinite}
+    .mascot-eye.left{left:15px}.mascot-eye.right{right:15px;animation-delay:.1s}
+    .mascot-mouth{position:absolute;left:24px;bottom:9px;width:12px;height:5px;border-bottom:2px solid #d9fbff;border-radius:50%}
+    .mascot-cheek{position:absolute;top:32px;width:5px;height:3px;border-radius:50%;background:#42baff;opacity:.75}
+    .mascot-cheek.left{left:8px}.mascot-cheek.right{right:8px}
+    .mascot-body{position:absolute;top:88px;left:35px;width:43px;height:36px;border:1px solid #b6efff;border-radius:12px 12px 15px 15px;background:linear-gradient(135deg,#e7faff,#328dcc 35%,#0b2032 37%);box-shadow:inset 0 0 12px #54bdff66,0 0 13px #168fff58}
+    .mascot-core{position:absolute;top:10px;left:13px;width:15px;height:15px;border:2px solid #eafaff;border-radius:50%;background:#159fe6;box-shadow:0 0 12px #57d8ff;animation:signal-pulse 2s ease-in-out infinite}
+    .mascot-arm{position:absolute;top:97px;width:16px;height:7px;border:1px solid #bceeff;border-radius:8px;background:#168ac5;transform-origin:center;animation:mascot-wave 2.8s ease-in-out infinite}
+    .mascot-arm.left{left:21px;transform:rotate(-28deg)}.mascot-arm.right{right:19px;transform:rotate(28deg);animation-delay:.3s}
+    .mascot-leg{position:absolute;top:121px;width:8px;height:15px;border:1px solid #aeeaff;border-radius:0 0 5px 5px;background:#145779}
+    .mascot-leg.left{left:43px}.mascot-leg.right{right:43px}
+    .mascot-boot{position:absolute;top:133px;width:15px;height:6px;border:1px solid #e5faff;border-radius:5px;background:#159de0;box-shadow:0 0 9px #28a8ff70}
+    .mascot-boot.left{left:37px}.mascot-boot.right{right:37px}
+    .mascot-lightning{position:absolute;width:16px;height:32px;background:linear-gradient(#fff,#62d7ff 60%,#168fff);clip-path:polygon(55% 0,100% 0,69% 38%,96% 38%,12% 100%,38% 54%,4% 54%);filter:drop-shadow(0 0 8px #40bcff);animation:mascot-zap 3.8s steps(1,end) infinite}
+    .mascot-lightning.left{top:57px;left:5px}.mascot-lightning.right{top:96px;right:4px;width:12px;height:25px;animation-delay:1.4s}
+    .mascot-button.is-curious .mascot-head{transform:translateY(-3px) rotate(-7deg)}
+    .mascot-button.is-excited .mascot-arm.right{animation-duration:.35s}
+    .lightning-field{position:absolute;z-index:0;inset:0;overflow:hidden;pointer-events:none;contain:strict}
+    .site-lightning{position:absolute;overflow:visible;opacity:0;mix-blend-mode:screen;animation:lightning-burst 640ms linear forwards}
+    .site-lightning path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+    @keyframes lightning-burst{0%,100%{opacity:0}8%{opacity:.68}13%{opacity:.08}20%{opacity:.54}27%,100%{opacity:0}}
+    @keyframes mascot-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @keyframes mascot-orbit{to{transform:rotate(336deg)}}
+    @keyframes mascot-blink{0%,43%,47%,100%{transform:scaleY(1)}45%{transform:scaleY(.12)}}
+    @keyframes mascot-wave{0%,75%,100%{transform:rotate(-28deg)}82%,93%{transform:rotate(-72deg)}}
+    @keyframes mascot-zap{0%,35%,38%,100%{opacity:.28}36%,37%{opacity:1}}
+    @media(max-width:900px){.live-copy{grid-template-columns:1fr}.live-copy .live-actions{grid-column:1;grid-row:auto;min-width:0;margin-top:5px}}
+    @media(max-width:680px){.hero{min-height:630px;padding:84px 0 72px}.hero-backdrop{object-position:52% center}.hero:before{background:linear-gradient(90deg,#030812e8,#06101bbd 65%,#07142677)}.hero-bolt{right:8%;top:12%;width:48px;height:94px}.hero-bolt-secondary{right:19%;top:78%;width:28px;height:54px}.setup-grid{grid-template-columns:1fr;gap:12px}.setup-shot{aspect-ratio:4/3}.setup-shot img{object-position:center 55%}.discord-hub{padding:64px 0}.discord-grid{grid-template-columns:1fr}.discord-panel,.discord-panel-content{min-height:270px}.discord-profile{min-height:230px;padding:22px}.dialog-shell{padding:22px}.dialog-title-row h2{font-size:2.35rem}.community-fab{right:14px;bottom:14px;min-height:46px}.live-players{grid-template-columns:1fr}.live-copy .live-actions{min-width:0}}
+    .navlinks{gap:14px}
+    .hero:after{display:none}
+    @media(max-width:680px){nav{flex-wrap:wrap;gap:10px;padding:10px 0}.navlinks{order:3;display:flex;width:100%;justify-content:space-between;gap:8px;overflow-x:auto;padding-bottom:5px;font-size:.67rem}.navlinks a{white-space:nowrap}}
   </style>
 </head>
 <body>
+<div class="topline"><div class="wrap"><span class="live-dot" aria-hidden="true"></span> Le QG gaming de Zenyth_V <span aria-hidden="true">//</span> Toujours prêts à jouer</div></div>
 <header>
   <div class="wrap">
     <nav aria-label="Navigation principale">
       <a class="logo" href="#accueil">ZENYTH<span>_V</span></a>
-      <div class="navlinks"><a href="#univers">Mon univers</a><a href="#live">Live Twitch</a><a href="#communaute">Communauté</a></div>
-      <a class="btn" href="https://twitch.tv/Zenyth_V" target="_blank" rel="noopener">▶ Twitch</a>
+      <div class="navlinks"><a href="#univers">Univers</a><a href="#setup">Setup</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="#discord">Discord</a></div>
+      <a class="btn nav-cta" href="https://twitch.tv/Zenyth_V" target="_blank" rel="noopener">▶ Twitch</a>
     </nav>
   </div>
 </header>
 <main>
   <section class="hero" id="accueil">
-    <div class="wrap">
-      <div class="eyebrow">Gaming • Live • Communauté</div>
-      <h1>WELCOME TO<span>ZENYTH_V</span></h1>
-      <p>Bienvenue dans mon univers gaming. Prépare-toi pour les sessions de jeu, les bons moments et une communauté qui avance ensemble. Passe sur Twitch et viens dire salut dans le chat !</p>
-      <div class="actions">
-        <a class="btn" href="https://twitch.tv/Zenyth_V" target="_blank" rel="noopener">🔴 Rejoindre ma chaîne</a>
-        <a class="btn outline" href="#univers">Découvrir le site ↓</a>
+    <img class="hero-backdrop" src="assets/images/435.png" alt="" fetchpriority="high">
+    <div class="lightning-field" id="lightning-field" aria-hidden="true"></div>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Gaming · Live · Communauté</div>
+        <h1>WELCOME TO<span>ZENYTH_V</span></h1>
+        <p>La course à fond dans <em>The Crew 2</em> et les <em>Need for Speed</em>, les étoiles de <em>No Man’s Sky</em> et les horizons de <em>Starfield</em> : voilà les mondes où j’aime passer du temps. Ici, je partage aussi mon setup, les sessions, les clips, les rediffusions et les moments avec la team. Twitch et YouTube pour les lives, TikTok pour les meilleurs extraits, Discord pour discuter et préparer la prochaine partie.</p>
+        <div class="actions">
+          <a class="btn" href="live.html">▶ Voir les lives</a>
+          <a class="btn outline" href="#univers">Explorer le QG ↓</a>
+        </div>
+        <div class="hero-note"><span></span> La prochaine partie commence ici</div>
       </div>
     </div>
   </section>
-  <section id="univers">
+  <div class="ticker" aria-label="Gaming, live et communauté">
+    <div class="ticker-track" aria-hidden="true"><span>ZENYTH_V <b>✦</b> GAME ON <b>✦</b> LIVE & DIRECT <b>✦</b> JOUE COLLECTIF <b>✦</b> ZENYTH_V <b>✦</b> GAME ON <b>✦</b> LIVE & DIRECT <b>✦</b> JOUE COLLECTIF <b>✦</b></span><span>ZENYTH_V <b>✦</b> GAME ON <b>✦</b> LIVE & DIRECT <b>✦</b> JOUE COLLECTIF <b>✦</b> ZENYTH_V <b>✦</b> GAME ON <b>✦</b> LIVE & DIRECT <b>✦</b> JOUE COLLECTIF <b>✦</b></span></div>
+  </div>
+  <div class="wrap metrics" aria-label="L'esprit de la chaîne">
+    <div class="metric"><strong>01 / Course</strong><span>The Crew 2 · Need for Speed.</span></div>
+    <div class="metric"><strong>02 / Exploration</strong><span>No Man’s Sky · Starfield.</span></div>
+    <div class="metric"><strong>03 / La team</strong><span>Lives, clips et sessions ensemble.</span></div>
+  </div>
+  <section class="games" id="univers">
     <div class="wrap">
-      <div class="section-head"><div class="kicker">L'univers Zenyth</div><h2>On se retrouve en jeu.</h2><p>Un site pensé pour la chaîne et les personnes qui la font vivre.</p></div>
-      <div class="cards">
-        <article class="card"><div class="icon">⚡</div><h3>Énergie gaming</h3><p>Une identité bleu électrique, des éclairs et une ambiance faite pour le gaming.</p></article>
-        <article class="card"><div class="icon">🎮</div><h3>Sessions de jeu</h3><p>Retrouve les jeux et les moments partagés directement sur la chaîne Twitch.</p></article>
-        <article class="card"><div class="icon">💬</div><h3>La communauté</h3><p>Viens participer au chat, encourager le stream et rencontrer les autres viewers.</p></article>
+      <div class="section-head"><div><div class="kicker">Mes univers de jeu</div><h2>Quatre mondes. Même pilote.</h2></div><p>Des routes à avaler, des étoiles à explorer et des histoires de science-fiction où se perdre.</p></div>
+      <div class="game-grid">
+        <article class="game-card" data-number="01" style="--glow:#168fff42;background-image:linear-gradient(145deg,#08111ce8,#08111ca8),url('assets/images/435.png');background-size:cover;background-position:left bottom"><div class="game-top"><span>Course · monde ouvert</span><span>01 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🏁</div><h3>The Crew 2</h3><p>Routes, grands espaces et virées à travers les États-Unis.</p></div><button class="game-open" type="button" data-game="crew2" aria-haspopup="dialog">Fiche joueur ↗</button></article>
+        <article class="game-card" data-number="02" style="--glow:#00d4ff35;background-image:linear-gradient(145deg,#08111ce8,#08111ca8),url('assets/images/435.png');background-size:cover;background-position:center bottom"><div class="game-top"><span>Course · vitesse</span><span>02 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🚘</div><h3>Need for Speed</h3><p>La vitesse, les néons et la ligne d’arrivée dans le rétro.</p></div><button class="game-open" type="button" data-game="nfs" aria-haspopup="dialog">Fiche joueur ↗</button></article>
+        <article class="game-card" data-number="03" style="--glow:#47c8ff35;background-image:linear-gradient(145deg,#08111cbd,#08111c9c),url('assets/images/435.png');background-size:cover;background-position:center top"><div class="game-top"><span>Exploration · infini</span><span>03 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🌌</div><h3>No Man’s Sky</h3><p>Des systèmes à découvrir, des planètes à explorer, sans itinéraire imposé.</p></div><button class="game-open" type="button" data-game="nms" aria-haspopup="dialog">Fiche joueur ↗</button></article>
+        <article class="game-card" data-number="04" style="--glow:#ff9c4a28;background-image:linear-gradient(145deg,#08111ce8,#08111ca8),url('assets/images/435.png');background-size:cover;background-position:right top"><div class="game-top"><span>Science-fiction · étoiles</span><span>04 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🚀</div><h3>Starfield</h3><p>Une autre frontière, des mondes lointains et une grande aventure spatiale.</p></div><button class="game-open" type="button" data-game="starfield" aria-haspopup="dialog">Fiche joueur ↗</button></article>
       </div>
     </div>
   </section>
-  <section id="live">
+  <dialog class="game-dialog" id="game-dialog" aria-labelledby="game-dialog-title">
+    <div class="game-dialog-shell">
+      <div class="game-dialog-top"><div><div class="kicker" id="game-dialog-kicker">Fiche jeu</div><h2 id="game-dialog-title"></h2></div><form method="dialog"><button class="game-dialog-close" type="submit" aria-label="Fermer la fiche">×</button></form></div>
+      <p class="game-dialog-description" id="game-dialog-description"></p>
+      <ul class="game-tips" id="game-dialog-tips"></ul>
+      <a class="btn" id="game-dialog-link" href="#" target="_blank" rel="noopener">Site officiel ↗</a>
+    </div>
+  </dialog>
+  <section class="setup-section" id="setup">
     <div class="wrap">
-      <div class="section-head"><div class="kicker">En direct de Twitch</div><h2>Le live t'attend.</h2><p>Le bouton ouvre la chaîne officielle Zenyth_V.</p></div>
-      <div class="streambox">
-        <div class="screen"><div><div class="play">▶</div><strong>ZENYTH_V LIVE</strong><span style="color:#a8bbd3">Ouvre Twitch pour voir si je suis en direct</span></div></div>
-        <div><div class="kicker">Ma chaîne officielle</div><h2>Ne rate pas le prochain stream.</h2><p>Consulte les lives, les vidéos, les clips et les informations que j'ajoute à ma chaîne. Le statut en direct n'est pas affiché automatiquement sur cette version du site.</p><a class="btn" href="https://twitch.tv/Zenyth_V" target="_blank" rel="noopener">Voir Zenyth_V sur Twitch ↗</a></div>
+      <div class="section-head"><div><div class="kicker">Le QG, en vrai</div><h2>Setup chargé. Game on.</h2></div><p>Mon espace de jeu, mes écrans et l'ambiance bleue qui accompagne les sessions.</p></div>
+      <div class="setup-grid">
+        <figure class="setup-shot"><img src="assets/images/458.jpg" alt="Vue du setup gaming Zenyth_V avec ses écrans et son éclairage bleu" loading="lazy"><span class="photo-bolt photo-bolt-left" aria-hidden="true"></span><span class="photo-bolt photo-bolt-right" aria-hidden="true"></span><figcaption><strong>La station de jeu</strong><span>Écrans · Xbox · live</span></figcaption></figure>
+        <figure class="setup-shot"><img src="assets/images/457.jpg" alt="Détail de l'espace gaming Zenyth_V éclairé en bleu" loading="lazy"><span class="photo-bolt photo-bolt-left" aria-hidden="true"></span><span class="photo-bolt photo-bolt-right" aria-hidden="true"></span><figcaption><strong>L'ambiance du QG</strong><span>Bleu électrique · Zenyth_V</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section class="games" id="live">
+    <div class="wrap">
+      <div class="section-head"><div><div class="kicker">Le QG continue</div><h2>Choisis ta prochaine page.</h2></div><p>Des espaces dédiés pour suivre les directs, découvrir les outils et discuter avec la communauté.</p></div>
+      <div class="game-grid">
+        <a class="game-card" data-number="01" href="live.html"><div class="game-top"><span>Twitch · TikTok · YouTube</span><span>LIVE</span></div><div><div class="game-symbol" aria-hidden="true">▶</div><h3>Tous les lives</h3><p>Les plateformes, les replays et Xbox Cloud réunis sur une page dédiée.</p></div></a>
+        <a class="game-card" data-number="02" href="outils.html"><div class="game-top"><span>Loadout créateur</span><span>TOOLS</span></div><div><div class="game-symbol" aria-hidden="true">⚙</div><h3>Outils de stream</h3><p>OBS, alertes, commandes de chat et raccourcis gratuits pour Twitch.</p></div></a>
+        <a class="game-card" data-number="03" href="communaute.html"><div class="game-top"><span>Questions · publications</span><span>TEAM</span></div><div><div class="game-symbol" aria-hidden="true">💬</div><h3>La communauté</h3><p>Questions, idées et discussions entre deux lives.</p></div></a>
+      </div>
+    </div>
+  </section>
+  <section class="section-social" id="reseaux">
+    <div class="wrap">
+      <div class="section-head"><div><div class="kicker">Les fréquences Zenyth_V</div><h2>Trois portes. Même team.</h2></div><p>Twitch et YouTube pour les lives, TikTok pour retrouver le profil et ses directs, Discord pour rejoindre le serveur. Les autres réseaux se configurent juste en dessous.</p></div>
+      <div class="social-grid" id="social-list" aria-live="polite"></div>
+      <details class="link-manager">
+        <summary>＋ Ajouter ou modifier mes liens</summary>
+        <form class="link-form" id="social-form">
+          <label>Plateforme<select id="social-platform" required><option value="TikTok">TikTok</option><option value="Discord">Discord</option><option value="YouTube">YouTube</option><option value="Xbox">Xbox</option><option value="Instagram">Instagram</option><option value="X">X</option><option value="Steam">Steam</option><option value="Autre">Autre</option></select></label>
+          <label>Nom affiché<input id="social-title" type="text" maxlength="32" placeholder="Ex. Zenyth_V" required></label>
+          <label>Adresse du profil<input id="social-url" type="url" placeholder="https://..." required></label>
+          <button class="btn" type="submit">Enregistrer</button>
+        </form>
+        <p class="form-message" id="form-message" role="status"></p>
+        <p class="manager-note">Les liens ajoutés ici sont enregistrés dans ce navigateur. Pour les afficher à tous les visiteurs du site, ajoute tes adresses directement dans le fichier du site avant sa mise en ligne.</p>
+      </details>
+    </div>
+  </section>
+  <section class="discord-hub" id="discord">
+    <div class="wrap">
+      <div class="section-head"><div><div class="kicker">Connexion à la team</div><h2>Le QG Discord.</h2></div><p>Le serveur pour les sessions en équipe et le profil qui va avec. L’invitation et les images viennent des infos publiques du lien Discord.</p></div>
+      <div class="discord-grid">
+        <article class="discord-panel discord-server">
+          <img class="discord-banner-img" src="assets/images/435.png" alt="" loading="lazy">
+          <div class="discord-panel-content">
+            <div class="discord-mark-row"><img class="discord-server-icon" src="https://cdn.discordapp.com/icons/1077835321946943508/cf3d9e375691758d525cfd026c358c89.png?size=256" alt="Icône du serveur Discord Zenyth_V" loading="lazy"><div><div class="kicker">Serveur communautaire</div><h3>Zenyth_V · Discord</h3></div></div>
+            <p>Rejoins le serveur, retrouve la team et prépare la prochaine session.</p>
+            <a class="btn" href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">Entrer dans le serveur ↗</a>
+          </div>
+        </article>
+        <article class="discord-panel discord-profile">
+          <div class="discord-profile-top"><img class="discord-profile-avatar" src="https://cdn.discordapp.com/avatars/1077831338855497729/07d3b86e198351923bca15c75aea1f67.png?size=256" alt="Avatar Discord Zenyth_V_ associé à l’invitation du serveur" loading="lazy"><div><div class="kicker">Profil Discord</div><h3>Zenyth_V_</h3></div></div>
+          <p>Mon profil Discord public, lié à l’invitation du serveur.</p>
+          <a class="btn outline" href="https://discord.com/users/1077831338855497729" target="_blank" rel="noopener">Ouvrir le profil ↗</a>
+        </article>
       </div>
     </div>
   </section>
   <section id="communaute">
     <div class="wrap">
-      <div class="community"><div class="kicker">Tu fais partie de l'aventure</div><h2>Prêt à rejoindre la team ?</h2><p style="color:#c0d1e5;max-width:600px;margin:0 auto 24px">Suis la chaîne pour retrouver les prochaines sessions et soutenir le contenu.</p><a class="btn" href="https://twitch.tv/Zenyth_V" target="_blank" rel="noopener">Rejoindre la communauté ↗</a></div>
+      <div class="community"><div class="kicker">La partie ne fait que commencer</div><h2>Ta place est dans la team.</h2><p>Pose une question, partage une idée ou retrouve la team sur le serveur.</p><a class="btn" href="communaute.html">Questions & publications ↗</a></div>
     </div>
   </section>
 </main>
-<footer><div class="wrap foot"><span>© <span id="year">2026</span> Zenyth_V Gaming</span><span>Site de fan / présentation non affilié officiellement à Twitch.</span></div></footer>
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<button class="community-fab" type="button" data-open-community aria-haspopup="dialog" aria-controls="community-dialog"><span aria-hidden="true">?</span> Communauté</button>
+<dialog class="community-dialog" id="community-dialog" aria-labelledby="community-dialog-title">
+  <div class="dialog-shell">
+    <div class="dialog-title-row"><div><div class="kicker">Portail Zenyth_V</div><h2 id="community-dialog-title">On se retrouve.</h2></div><form class="dialog-close" method="dialog"><button type="submit" aria-label="Fermer la fenêtre">×</button></form></div>
+    <p class="dialog-intro">Une question, envie de rejoindre la team ou de m’écrire en privé ? Choisis ton canal.</p>
+    <div class="dialog-actions"><a class="btn" href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">Rejoindre le Discord et poser une question ↗</a><a class="btn outline" href="https://discord.com/users/1077831338855497729" target="_blank" rel="noopener">M’écrire en privé sur Discord ↗</a></div>
+    <div class="dialog-moderation"><h3>Espace modération</h3><p>Les rôles, modos et bannissements se gèrent dans les outils des plateformes. Seuls les comptes qui ont les permissions nécessaires peuvent les appliquer.</p><div class="dialog-moderation-links"><a class="btn outline" href="https://discord.com/channels/1077835321946943508" target="_blank" rel="noopener">Ouvrir le serveur Discord ↗</a><a class="btn outline" href="https://dashboard.twitch.tv/u/zenyth_v/community/roles" target="_blank" rel="noopener">Modération Twitch ↗</a></div></div>
+  </div>
+</dialog>
+<div class="mascot-wrap" id="mascot-wrap">
+  <div class="mascot-bubble" id="mascot-bubble" role="status" aria-live="polite">Salut, pilote !</div>
+  <button class="mascot-button" id="mascot-button" type="button" aria-label="Compagnon Zenyth_V, cliquer pour le faire réagir">
+    <span class="mascot-orbit" aria-hidden="true"></span>
+    <span class="mascot-lightning left" aria-hidden="true"></span><span class="mascot-lightning right" aria-hidden="true"></span>
+    <span class="mascot-antenna" aria-hidden="true"></span>
+    <span class="mascot-head" aria-hidden="true"><span class="mascot-eye left"></span><span class="mascot-eye right"></span><span class="mascot-cheek left"></span><span class="mascot-cheek right"></span><span class="mascot-mouth"></span></span>
+    <span class="mascot-body" aria-hidden="true"><span class="mascot-core"></span></span>
+    <span class="mascot-arm left" aria-hidden="true"></span><span class="mascot-arm right" aria-hidden="true"></span>
+    <span class="mascot-leg left" aria-hidden="true"></span><span class="mascot-leg right" aria-hidden="true"></span>
+    <span class="mascot-boot left" aria-hidden="true"></span><span class="mascot-boot right" aria-hidden="true"></span>
+  </button>
+</div>
+<footer><div class="wrap foot"><span>© <span id="year"></span> ZENYTH_V GAMING</span><span><a href="live.html">Lives</a> · <a href="outils.html">Outils</a> · <a href="communaute.html">Communauté</a> · <a href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">Discord ↗</a></span></div></footer>
+<script>
+  const socialList = document.getElementById('social-list');
+  const socialForm = document.getElementById('social-form');
+  const formMessage = document.getElementById('form-message');
+  const communityDialog = document.getElementById('community-dialog');
+  document.querySelectorAll('[data-open-community]').forEach((button) => {
+    button.addEventListener('click', () => communityDialog.showModal());
+  });
+  communityDialog.addEventListener('click', (event) => {
+    if (event.target === communityDialog) communityDialog.close();
+  });
+  const gameDialog = document.getElementById('game-dialog');
+  const gameInformation = {
+    crew2: {
+      category: 'Course arcade · monde ouvert',
+      title: 'The Crew 2',
+      description: 'Un grand terrain de jeu américain où voitures, motos, bateaux et avions se partagent la route, l’eau et le ciel.',
+      tips: ['Teste plusieurs disciplines pour trouver ta préférée.', 'Les événements Live Xtrem enchaînent plusieurs types de véhicules.', 'Garde un véhicule adapté à chaque discipline avant de lancer un événement.'],
+      url: 'https://www.ubisoft.com/en-us/game/the-crew/the-crew-2'
+    },
+    nfs: {
+      category: 'Saga de course · personnalisation',
+      title: 'Need for Speed',
+      description: 'La série mêle courses de rue, voitures personnalisées et poursuites. Les événements et systèmes changent selon l’épisode.',
+      tips: ['Choisis un épisode avant de chercher un guide : les réglages diffèrent.', 'Teste les réglages de maniabilité sur route avant les courses difficiles.', 'Adapte la voiture à l’épreuve plutôt que de garder un seul build.'],
+      url: 'https://www.ea.com/games/need-for-speed'
+    },
+    nms: {
+      category: 'Exploration · survie · construction',
+      title: 'No Man’s Sky',
+      description: 'Explore un univers généré à l’infini, découvre des planètes, collecte des ressources et construis tes propres bases.',
+      tips: ['Scanne les ressources et les lieux d’intérêt avant de quitter une planète.', 'Garde du carburant et des matériaux de réparation pour les déplacements.', 'La construction de base et les missions d’introduction donnent de bons repères.'],
+      url: 'https://www.nomanssky.com/'
+    },
+    starfield: {
+      category: 'RPG spatial · exploration · vaisseaux',
+      title: 'Starfield',
+      description: 'Pars explorer les Settled Systems, suis les quêtes à ton rythme et façonne ton personnage, ton équipage et ton vaisseau.',
+      tips: ['Essaie les commandes de pilotage et l’atelier de vaisseau dès que possible.', 'Les ressources et les med packs sont utiles à garder dans l’inventaire.', 'Tu peux alterner quêtes principales, factions et exploration sans guide spoiler.'],
+      url: 'https://bethesda.net/en/game/starfield'
+    }
+  };
+  document.querySelectorAll('[data-game]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const game = gameInformation[button.dataset.game];
+      if (!game) return;
+      document.getElementById('game-dialog-kicker').textContent = game.category;
+      document.getElementById('game-dialog-title').textContent = game.title;
+      document.getElementById('game-dialog-description').textContent = game.description;
+      document.getElementById('game-dialog-link').href = game.url;
+      const tips = document.getElementById('game-dialog-tips');
+      tips.replaceChildren();
+      game.tips.forEach((tip) => {
+        const item = document.createElement('li');
+        item.textContent = tip;
+        tips.append(item);
+      });
+      gameDialog.showModal();
+    });
+  });
+  gameDialog.addEventListener('click', (event) => {
+    if (event.target === gameDialog) gameDialog.close();
+  });
+  const mascotWrap = document.getElementById('mascot-wrap');
+  const mascotButton = document.getElementById('mascot-button');
+  const mascotBubble = document.getElementById('mascot-bubble');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mascotMessages = ['Salut, pilote !', 'Prêt pour une nouvelle partie ?', 'Éclair chargé. Team prête ?', 'On se retrouve sur Twitch ?', 'GG pour ton passage au QG !'];
+  let mascotMessageTimer;
+  let lastMascotGreeting = 0;
+
+  function showMascotMessage(message) {
+    window.clearTimeout(mascotMessageTimer);
+    mascotBubble.textContent = message;
+    mascotWrap.classList.add('is-speaking');
+    mascotMessageTimer = window.setTimeout(() => mascotWrap.classList.remove('is-speaking'), 2600);
+  }
+
+  function moveMascot() {
+    const maxLeft = Math.max(8, window.innerWidth - mascotWrap.offsetWidth - 8);
+    const topMin = Math.min(100, Math.max(16, window.innerHeight - mascotWrap.offsetHeight - 20));
+    const maxTop = Math.max(topMin, window.innerHeight - mascotWrap.offsetHeight - 18);
+    const left = Math.random() < 0.5 ? 8 : maxLeft;
+    const top = topMin + Math.random() * Math.max(0, maxTop - topMin);
+    mascotWrap.style.left = `${left}px`;
+    mascotWrap.style.top = `${top}px`;
+  }
+
+  function scheduleMascotRoam() {
+    window.setTimeout(() => {
+      if (!document.hidden && !reducedMotion) moveMascot();
+      scheduleMascotRoam();
+    }, 6500 + Math.random() * 7000);
+  }
+
+  if (!reducedMotion) scheduleMascotRoam();
+  mascotButton.addEventListener('click', () => {
+    const message = mascotMessages[Math.floor(Math.random() * mascotMessages.length)];
+    mascotButton.classList.add('is-excited');
+    showMascotMessage(message);
+    window.setTimeout(() => mascotButton.classList.remove('is-excited'), 1200);
+    if (!reducedMotion) moveMascot();
+  });
+
+  document.addEventListener('pointermove', (event) => {
+    if (event.pointerType !== 'mouse') return;
+    const bounds = mascotWrap.getBoundingClientRect();
+    const centerX = bounds.left + bounds.width / 2;
+    const centerY = bounds.top + bounds.height / 2;
+    const distance = Math.hypot(event.clientX - centerX, event.clientY - centerY);
+    if (distance < 145 && Date.now() - lastMascotGreeting > 7500) {
+      lastMascotGreeting = Date.now();
+      mascotButton.classList.add('is-curious');
+      showMascotMessage('Oh, salut ! Tu viens jouer ?');
+      window.setTimeout(() => mascotButton.classList.remove('is-curious'), 1600);
+    }
+  }, { passive: true });
+
+  const lightningField = document.getElementById('lightning-field');
+  const svgNamespace = 'http://www.w3.org/2000/svg';
+  let lightningSequence = 0;
+  let lightningCount = 0;
+
+  function makeLightningPath(points) {
+    return points.map((point, index) => `${index === 0 ? 'M' : 'L'} ${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(' ');
+  }
+
+  function makeLightningBranch(origin, direction) {
+    const length = 24 + Math.random() * 48;
+    const height = 34 + Math.random() * 58;
+    return makeLightningPath([
+      { x: origin.x, y: origin.y },
+      { x: origin.x + direction * length * .34, y: origin.y + height * .22 },
+      { x: origin.x + direction * length * .3, y: origin.y + height * .47 },
+      { x: origin.x + direction * length, y: origin.y + height }
+    ]);
+  }
+
+  function createLightning() {
+    if (document.hidden || lightningCount >= 3) return;
+    lightningCount += 1;
+    const fieldWidth = lightningField.clientWidth;
+    const fieldHeight = lightningField.clientHeight;
+    const boltHeight = Math.min(280 + Math.random() * 170, Math.max(180, fieldHeight * .62));
+    const boltWidth = boltHeight * .36;
+    const edgeWidth = Math.min(fieldWidth * .1, 105);
+    const bolt = document.createElementNS(svgNamespace, 'svg');
+    const gradientId = `bolt-gradient-${lightningSequence}`;
+    const filterId = `bolt-glow-${lightningSequence}`;
+    lightningSequence += 1;
+    bolt.classList.add('site-lightning');
+    bolt.setAttribute('aria-hidden', 'true');
+    bolt.setAttribute('viewBox', '0 0 180 500');
+    bolt.setAttribute('width', boltWidth.toFixed(0));
+    bolt.setAttribute('height', boltHeight.toFixed(0));
+    const onLeftEdge = Math.random() < .5;
+    bolt.style.left = onLeftEdge
+      ? `${Math.random() * Math.max(0, edgeWidth - boltWidth * .35)}px`
+      : `${Math.max(0, fieldWidth - edgeWidth - boltWidth * .65) + Math.random() * edgeWidth * .35}px`;
+    bolt.style.top = `${Math.random() * 58}px`;
+    bolt.style.transform = `rotate(${-13 + Math.random() * 26}deg)`;
+
+    const definitions = document.createElementNS(svgNamespace, 'defs');
+    const gradient = document.createElementNS(svgNamespace, 'linearGradient');
+    gradient.id = gradientId;
+    gradient.setAttribute('x1', '0');
+    gradient.setAttribute('y1', '0');
+    gradient.setAttribute('x2', '1');
+    gradient.setAttribute('y2', '1');
+    [[0, '#ffffff'], [.34, '#e5faff'], [.7, '#a4dcff'], [1, '#5dafff']].forEach(([offset, color]) => {
+      const stop = document.createElementNS(svgNamespace, 'stop');
+      stop.setAttribute('offset', `${offset * 100}%`);
+      stop.setAttribute('stop-color', color);
+      gradient.append(stop);
+    });
+    const glowFilter = document.createElementNS(svgNamespace, 'filter');
+    glowFilter.id = filterId;
+    glowFilter.setAttribute('x', '-80%');
+    glowFilter.setAttribute('y', '-30%');
+    glowFilter.setAttribute('width', '260%');
+    glowFilter.setAttribute('height', '160%');
+    const blur = document.createElementNS(svgNamespace, 'feGaussianBlur');
+    blur.setAttribute('stdDeviation', '5');
+    glowFilter.append(blur);
+    definitions.append(gradient, glowFilter);
+    bolt.append(definitions);
+
+    const mainPoints = [{ x: 92, y: 0 }];
+    for (let index = 1; index <= 14; index += 1) {
+      const previous = mainPoints[index - 1];
+      mainPoints.push({
+        x: Math.max(18, Math.min(162, previous.x + (Math.random() - .5) * 62)),
+        y: index * 36
+      });
+    }
+    const paths = [makeLightningPath(mainPoints)];
+    const branchCount = 1 + Math.floor(Math.random() * 3);
+    for (let index = 0; index < branchCount; index += 1) {
+      const origin = mainPoints[4 + Math.floor(Math.random() * 8)];
+      const direction = Math.random() < .5 ? -1 : 1;
+      paths.push(makeLightningBranch(origin, direction));
+    }
+
+    const glowGroup = document.createElementNS(svgNamespace, 'g');
+    glowGroup.setAttribute('filter', `url(#${filterId})`);
+    paths.forEach((pathData, index) => {
+      const path = document.createElementNS(svgNamespace, 'path');
+      path.setAttribute('d', pathData);
+      path.setAttribute('stroke', '#55baff');
+      path.setAttribute('stroke-width', index === 0 ? '13' : '7');
+      path.setAttribute('opacity', index === 0 ? '.8' : '.54');
+      glowGroup.append(path);
+    });
+    bolt.append(glowGroup);
+    paths.forEach((pathData, index) => {
+      const path = document.createElementNS(svgNamespace, 'path');
+      path.setAttribute('d', pathData);
+      path.setAttribute('stroke', `url(#${gradientId})`);
+      path.setAttribute('stroke-width', index === 0 ? '3.6' : '2');
+      path.setAttribute('opacity', '.96');
+      bolt.append(path);
+    });
+
+    lightningField.append(bolt);
+    window.setTimeout(() => bolt.remove(), 900);
+  }
+
+  function scheduleLightning() {
+    if (lightningCount >= 3) return;
+    window.setTimeout(() => {
+      createLightning();
+      scheduleLightning();
+    }, 1700 + Math.random() * 1900);
+  }
+
+  if (!reducedMotion) window.setTimeout(scheduleLightning, 450);
+
+  const twitchPlayer = document.getElementById('twitch-player');
+  const twitchParent = window.location.hostname;
+  if (twitchParent) {
+    twitchPlayer.src = `https://player.twitch.tv/?channel=Zenyth_V&parent=${encodeURIComponent(twitchParent)}&autoplay=true&muted=true`;
+  }
+  const storageKey = 'zenyth-v-social-links';
+  const platformIcons = { Twitch: 'T', TikTok: '♪', Discord: 'D', YouTube: '▶', Xbox: 'X', Instagram: '◎', X: '𝕏', Steam: 'S', Autre: '↗' };
+  const platformLogos = {
+    Twitch: 'https://www.google.com/s2/favicons?domain=twitch.tv&sz=128',
+    TikTok: 'https://www.google.com/s2/favicons?domain=tiktok.com&sz=128',
+    Discord: 'https://www.google.com/s2/favicons?domain=discord.com&sz=128',
+    YouTube: 'https://www.google.com/s2/favicons?domain=youtube.com&sz=128',
+    Xbox: 'https://www.google.com/s2/favicons?domain=xbox.com&sz=128',
+    Instagram: 'https://www.google.com/s2/favicons?domain=instagram.com&sz=128',
+    X: 'https://www.google.com/s2/favicons?domain=x.com&sz=128',
+    Steam: 'https://www.google.com/s2/favicons?domain=steampowered.com&sz=128'
+  };
+  const defaultLinks = [{ id: 'twitch', platform: 'Twitch', title: 'Chaîne officielle', url: 'https://twitch.tv/Zenyth_V' }, { id: 'youtube', platform: 'YouTube', title: 'Chaîne officielle', url: 'https://www.youtube.com/@Zenyth_V' }, { id: 'tiktok', platform: 'TikTok', title: '@.matth_f.g_', url: 'https://www.tiktok.com/@.matth_f.g_' }, { id: 'discord', platform: 'Discord', title: 'Serveur Zenyth_V', url: 'https://discord.gg/x7bpXeksh' }, { id: 'xbox-cryo', platform: 'Xbox', title: 'Cryo Z', url: 'https://account.xbox.com/en-US/Profile?gamertag=Cryo%20Z' }, { id: 'xbox-doom', platform: 'Xbox', title: "Doom iv'X", url: 'https://account.xbox.com/en-US/Profile?gamertag=Doom%20iv%27X' }];
+
+  function isValidLink(link) {
+    if (!link || typeof link.title !== 'string' || typeof link.platform !== 'string' || typeof link.url !== 'string') return false;
+    try {
+      const url = new URL(link.url);
+      return (url.protocol === 'https:' || url.protocol === 'http:') && link.title.trim() !== '';
+    } catch {
+      return false;
+    }
+  }
+
+  function loadLinks() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey));
+      return Array.isArray(saved) ? saved.filter(isValidLink) : defaultLinks;
+    } catch {
+      return defaultLinks;
+    }
+  }
+
+  let socialLinks = loadLinks();
+
+  function saveLinks() {
+    localStorage.setItem(storageKey, JSON.stringify(socialLinks));
+  }
+
+  function renderLinks() {
+    socialList.replaceChildren();
+    if (socialLinks.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'social-empty';
+      empty.textContent = 'Aucun lien pour le moment. Ouvre le gestionnaire pour ajouter tes réseaux.';
+      socialList.append(empty);
+      return;
+    }
+
+    socialLinks.forEach((link) => {
+      const card = document.createElement('article');
+      card.className = 'social-card';
+      const anchor = document.createElement('a');
+      anchor.href = link.url;
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
+      anchor.className = 'social-card-link';
+      anchor.style.cssText = 'display:flex;align-items:center;gap:14px;min-width:0;flex:1';
+      const icon = document.createElement('span');
+      icon.className = 'social-icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.dataset.platform = link.platform.toLowerCase();
+      const logoUrl = platformLogos[link.platform];
+      if (logoUrl) {
+        const logo = document.createElement('img');
+        logo.src = logoUrl;
+        logo.alt = '';
+        logo.loading = 'lazy';
+        logo.onerror = () => { icon.textContent = platformIcons[link.platform] || '↗'; };
+        icon.append(logo);
+      } else {
+        icon.textContent = platformIcons[link.platform] || '↗';
+      }
+      const copy = document.createElement('span');
+      copy.className = 'social-copy';
+      const title = document.createElement('strong');
+      title.textContent = link.title;
+      const platform = document.createElement('span');
+      platform.textContent = link.platform;
+      copy.append(title, platform);
+      const arrow = document.createElement('span');
+      arrow.className = 'social-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+      arrow.textContent = '↗';
+      anchor.append(icon, copy, arrow);
+      card.append(anchor);
+
+      const remove = document.createElement('button');
+      remove.className = 'social-remove';
+      remove.type = 'button';
+      remove.setAttribute('aria-label', `Supprimer le lien ${link.title}`);
+      remove.textContent = '×';
+      remove.addEventListener('click', () => {
+        socialLinks = socialLinks.filter((item) => item.id !== link.id);
+        saveLinks();
+        renderLinks();
+      });
+      card.append(remove);
+      socialList.append(card);
+    });
+  }
+
+  socialForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const platform = document.getElementById('social-platform').value;
+    const title = document.getElementById('social-title').value.trim();
+    const urlInput = document.getElementById('social-url').value.trim();
+    const link = { id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, platform, title, url: urlInput };
+    if (!isValidLink(link)) {
+      formMessage.textContent = 'Entre un nom et une adresse web valide commençant par http:// ou https://.';
+      return;
+    }
+    socialLinks.push(link);
+    saveLinks();
+    renderLinks();
+    socialForm.reset();
+    formMessage.textContent = `${platform} a été ajouté à tes liens sur cet appareil.`;
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  renderLinks();
+</script>
 </body>
 </html>
