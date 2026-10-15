@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="description" content="Retrouve Zenyth_V sur Xbox. Choisis un gamertag et ajoute-le depuis le profil Xbox officiel.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:site_name" content="ZENYTH_V Gaming">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Xbox avec Zenyth_V | Gamertags">
+  <meta property="og:description" content="Ajoute les comptes Xbox de Zenyth_V et retrouve-le pour jouer ensemble.">
+  <link rel="canonical" href="https://collossatronus.github.io/zenyth-v-gaming/xbox.html">
+  <meta property="og:url" content="https://collossatronus.github.io/zenyth-v-gaming/xbox.html">
+  <meta property="og:image" content="https://collossatronus.github.io/zenyth-v-gaming/assets/images/435.png">
+  <meta name="twitter:card" content="summary">
+  <title>Xbox avec Zenyth_V | ZENYTH_V Gaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="fortnite.html">Fortnite</a><a href="xbox.html" aria-current="page">Xbox</a><a href="live.html">Lives</a><a href="communaute.html">Communauté</a><a href="compte.html">Mon compte</a></nav></div></header>
+<main>
+  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // XBOX LIVE</div><h1 class="page-title">On se retrouve<br><span>sur Xbox.</span></h1><p class="page-lede">Ajoute mon gamertag depuis l’application Xbox ou ta console, puis envoie une demande d’ami pour retrouver mes sessions.</p></div></section>
+  <section class="content-section"><div class="wrap">
+    <div class="page-kicker">Mes profils Xbox</div><h2 class="section-title">Choisis le bon gamertag.</h2><p class="section-intro">J’ai deux profils. Recherche le gamertag dans Xbox, ou ouvre directement son profil officiel.</p>
+    <div class="xbox-profile-grid">
+      <article class="stream-card xbox-profile-card">
+        <div class="stream-heading"><div class="stream-brand"><span class="platform-icon xbox-platform-icon" aria-hidden="true">X</span>Xbox · Profil 1</div><span class="stream-link">Gamertag</span></div>
+        <p class="xbox-gamertag">Cryo Z</p>
+        <div class="feature-actions"><button class="button secondary" type="button" data-copy-gamertag="Cryo Z">Copier le gamertag</button><a class="button" href="https://account.xbox.com/en-US/Profile?gamertag=Cryo%20Z" target="_blank" rel="noopener noreferrer">Ouvrir le profil Xbox ↗</a></div>
+      </article>
+      <article class="stream-card xbox-profile-card">
+        <div class="stream-heading"><div class="stream-brand"><span class="platform-icon xbox-platform-icon" aria-hidden="true">X</span>Xbox · Profil 2</div><span class="stream-link">Gamertag</span></div>
+        <p class="xbox-gamertag">Doom iv'X</p>
+        <div class="feature-actions"><button class="button secondary" type="button" data-copy-gamertag="Doom iv'X">Copier le gamertag</button><a class="button" href="https://account.xbox.com/en-US/Profile?gamertag=Doom%20iv%27X" target="_blank" rel="noopener noreferrer">Ouvrir le profil Xbox ↗</a></div>
+      </article>
+    </div>
+    <p class="feature-status xbox-copy-status" id="xbox-copy-status" role="status" aria-live="polite"></p>
+    <div class="info-band">Pour m’ajouter : copie un gamertag, ouvre Xbox, recherche-le dans l’onglet Amis, puis choisis « Ajouter un ami ». Tu peux aussi ouvrir le profil ci-dessus et envoyer ta demande directement.</div>
+  </div></section>
+</main>
+<footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="index.html">Accueil</a> · <a href="jeux.html">Jeux</a> · <a href="fortnite.html">Fortnite</a> · <a href="live.html">Lives</a></span></div></footer>
+<script type="module">
+  document.querySelector("[data-year]").textContent = new Date().getFullYear();
+  const status = document.getElementById("xbox-copy-status");
+  document.querySelectorAll("[data-copy-gamertag]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyGamertag);
+        status.textContent = `Gamertag « ${button.dataset.copyGamertag} » copié.`;
+      } catch (error) {
+        status.textContent = `Copie impossible : ${error.message}. Sélectionne le gamertag affiché pour le copier.`;
+      }
+    });
+  });
+</script>
+</body>
+</html>
