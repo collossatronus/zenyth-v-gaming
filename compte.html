@@ -29,7 +29,7 @@
       </form>
       <div class="feature-actions"><button class="button secondary" type="button" id="discord-sign-in">Continuer avec Discord</button><button class="button secondary" type="button" id="sign-out" hidden>Se déconnecter</button></div>
       <p class="feature-status" id="auth-status" role="status" aria-live="polite">Le service de connexion doit être configuré avant la création de comptes.</p>
-      <div class="feature-actions"><a class="button secondary" id="admin-link" href="admin.html" hidden>Ouvrir le panneau propriétaire</a><a class="button secondary" id="moderation-link" href="moderation.html" hidden>Ouvrir la modération</a><a class="button secondary" href="messages.html">Messages privés</a></div>
+      <div class="feature-actions"><a class="button secondary" id="admin-link" href="admin.html" hidden>Ouvrir le panneau propriétaire</a><a class="button secondary" id="moderator-link" href="moderateurs.html" hidden>Espace modérateurs</a><a class="button secondary" id="moderation-link" href="moderation.html" hidden>Ouvrir la modération</a><a class="button secondary" href="messages.html">Messages privés</a></div>
     </section>
     <section class="feature-card" aria-labelledby="background-title">
       <div class="page-kicker">Profil visuel</div><h2 id="background-title">Choisis ton fond.</h2>
@@ -53,6 +53,7 @@
   const authStatus = document.getElementById("auth-status");
   const signOutButton = document.getElementById("sign-out");
   const adminLink = document.getElementById("admin-link");
+  const moderatorLink = document.getElementById("moderator-link");
   const moderationLink = document.getElementById("moderation-link");
   const themeStatus = document.getElementById("background-status");
   const backgroundKey = "zenyth-v-background";
@@ -97,6 +98,7 @@
     signOutButton.hidden = !session;
     adminLink.hidden = session?.user.app_metadata?.role !== "owner";
     moderationLink.hidden = !["owner", "moderator"].includes(session?.user.app_metadata?.role);
+    moderatorLink.hidden = !["owner", "moderator"].includes(session?.user.app_metadata?.role);
     document.getElementById("email-sign-in").disabled = Boolean(session);
     document.getElementById("email-sign-up").disabled = Boolean(session);
     document.getElementById("discord-sign-in").disabled = Boolean(session);

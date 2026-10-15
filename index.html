@@ -288,7 +288,7 @@
   <div class="wrap">
     <nav aria-label="Navigation principale">
       <a class="logo" href="#accueil">ZENYTH<span>_V</span></a>
-      <div class="navlinks"><a href="#univers">Univers</a><a href="jeux.html">Jeux</a><a href="#setup">Setup</a><a href="fortnite.html">Fortnite</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="appels.html">Appels</a><a href="messages.html">Messages</a><a href="dons.html">Dons</a><a href="compte.html">Mon compte</a><a href="#discord">Discord</a></div>
+      <div class="navlinks"><a href="#univers">Univers</a><a href="jeux.html">Jeux</a><a href="#setup">Setup</a><a href="fortnite.html">Fortnite</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="#abonnement">S’abonner</a><a href="appels.html">Appels</a><a href="messages.html">Messages</a><a href="dons.html">Dons</a><a href="compte.html">Mon compte</a><a href="#discord">Discord</a></div>
       <a class="btn nav-cta" href="https://twitch.tv/Zenyth_V" target="_blank" rel="noopener">▶ Twitch</a>
     </nav>
   </div>
@@ -397,6 +397,41 @@
   <section id="communaute">
     <div class="wrap">
       <div class="community"><div class="kicker">La partie ne fait que commencer</div><h2>Ta place est dans la team.</h2><p>Pose une question, partage une idée ou retrouve la team sur le serveur.</p><a class="btn" href="communaute.html">Questions & publications ↗</a></div>
+    </div>
+  </section>
+  <section id="abonnement">
+    <div class="wrap">
+      <div class="subscriber-card">
+        <div class="subscriber-card-copy">
+          <div class="page-kicker">ZENYTH_V // LA TEAM GRANDIT</div>
+          <h2>Rejoins les abonnés.</h2>
+          <span class="subscriber-count" id="subscriber-count" aria-live="polite">1 998</span>
+          <span class="subscriber-count-label">Abonnés Zenyth_V</span>
+          <div class="subscriber-actions">
+            <button class="subscriber-button" id="subscribe-button" type="button" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3h17L10.2 10h8.2L4 22l4.8-9H3l13-10H4Z" fill="currentColor"/></svg>
+              Chargement…
+            </button>
+            <a class="subscriber-youtube-link" href="https://www.youtube.com/@Zenyth_V?sub_confirmation=1" target="_blank" rel="noopener noreferrer">S’abonner aussi sur YouTube ↗</a>
+          </div>
+          <p class="subscriber-status" id="subscriber-status" role="status" aria-live="polite">Chargement du compteur…</p>
+          <p class="subscriber-disclaimer">Départ : 1 998 abonnés existants, comme tu l’as indiqué. Le compteur ajoute ensuite les comptes abonnés sur ce site ; il n’est pas synchronisé avec YouTube. L’abonnement au site demande un compte.</p>
+        </div>
+        <div class="subscriber-achievement" id="subscriber-trophy">
+          <svg class="subscriber-controller" viewBox="0 0 240 170" aria-hidden="true">
+            <path d="M42 54c-12 2-20 11-24 24L7 116c-4 14 12 25 24 16l30-24h118l30 24c12 9 28-2 24-16l-11-38c-4-13-12-22-24-24-31-6-62-9-78-9s-47 3-78 9Z" fill="#fff" stroke="#8ebbea" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M54 76v34M37 93h34" stroke="#86add8" stroke-width="9" stroke-linecap="round"/>
+            <circle cx="177" cy="82" r="7" fill="#9ec9f2"/><circle cx="196" cy="101" r="7" fill="#9ec9f2"/>
+            <path d="M103 82h13M109.5 75.5v13" stroke="#aac9e8" stroke-width="5" stroke-linecap="round"/>
+            <path d="M84 131h72l9 22H75l9-22Z" fill="#e9f4ff" stroke="#8ebbea" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M64 153h112" stroke="#7ea9d7" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <strong>Trophée 2 000</strong>
+          <span>Manette blanche · éclair bleu pastel</span>
+          <progress class="subscriber-progress" id="subscriber-progress" max="2000" value="1998" aria-label="Progression vers le trophée des 2 000 abonnés"></progress>
+          <p class="subscriber-milestone-status" id="subscriber-milestone-status" role="status" aria-live="polite">Encore 2 pour débloquer le trophée.</p>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -808,5 +843,6 @@
 </script>
 <script src="assets/js/config.js" defer></script>
 <script src="assets/js/site.js" defer></script>
+<script type="module" src="assets/js/subscriptions.js"></script>
 </body>
 </html>
