@@ -35,32 +35,25 @@ body{isolation:isolate}
 .xbox-platform-icon{border-color:#67d68a88;background:#102b1b;color:#76e89a;text-shadow:0 0 12px #42d97566}
 .xbox-gamertag{margin:12px 3px 5px;color:#effff3;font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(2.7rem,7vw,4.4rem);font-weight:900;letter-spacing:1px;line-height:1.05;overflow-wrap:anywhere}
 .xbox-copy-status{margin-top:12px}
-.subscriber-card{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr);gap:24px;align-items:center;padding:clamp(20px,4vw,34px);border:1px solid #ccecff75;background:radial-gradient(ellipse at 12% 15%,#ccecff18,transparent 52%),linear-gradient(135deg,#f4f9ff 0%,#dcecff 48%,#b8d4f3 100%);color:#12253d;box-shadow:0 18px 45px #0004}
+.subscriber-card{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:center;padding:clamp(20px,4vw,34px);border:1px solid #ccecff75;background:radial-gradient(ellipse at 12% 15%,#ccecff18,transparent 52%),linear-gradient(135deg,#f4f9ff 0%,#dcecff 48%,#b8d4f3 100%);color:#12253d;box-shadow:0 18px 45px #0004}
 .subscriber-card h2{margin:5px 0 10px;color:#102844;font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(2rem,5vw,3.3rem);line-height:.95;text-transform:uppercase}
 .subscriber-card .page-kicker{color:#587ca6}
 .subscriber-card-copy>p{max-width:610px;color:#36516f;font-size:.84rem}
-.subscriber-count{display:block;margin:8px 0;color:#163960;font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(3.5rem,8vw,5.8rem);font-weight:900;line-height:.9;text-shadow:0 2px 16px #75baff55}
-.subscriber-count-label{color:#345577;font-size:.78rem;font-weight:900;letter-spacing:1px;text-transform:uppercase}
-.subscriber-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:17px}
-.subscriber-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:10px 17px;border:1px solid #b3d8ff;background:linear-gradient(135deg,#fff,#d8ebff);color:#17395e;font:inherit;font-weight:900;box-shadow:0 7px 20px #528bd733;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
-.subscriber-button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 26px #528bd755}
-.subscriber-button:focus-visible,.subscriber-youtube-link:focus-visible{outline:2px solid #377bbd;outline-offset:4px}
-.subscriber-button:disabled{opacity:.65;cursor:not-allowed}
-.subscriber-button svg{width:21px;height:21px;flex:none}
-.subscriber-youtube-link{align-self:center;color:#284e77;font-size:.76rem;font-weight:900;text-decoration:underline;text-underline-offset:3px}
-.subscriber-status,.subscriber-disclaimer{min-height:1.4em;margin:12px 0 0;color:#36516f;font-size:.74rem}
 .subscriber-disclaimer{font-size:.68rem}
-.subscriber-achievement{display:flex;flex-direction:column;align-items:center;gap:7px;padding:16px;border:1px solid #7198c665;background:#ffffff68;text-align:center}
-.subscriber-controller{width:min(100%,210px);height:auto;filter:drop-shadow(0 10px 15px #4579a555);opacity:.42;filter:grayscale(.8) drop-shadow(0 7px 10px #4579a533);transition:opacity .3s ease,filter .3s ease,transform .3s ease}
-.subscriber-achievement.is-unlocked{border-color:#7cb5ed;background:#ffffffab;box-shadow:0 0 26px #90caff5c}
-.subscriber-achievement.is-unlocked .subscriber-controller{opacity:1;filter:drop-shadow(0 10px 15px #4579a555);transform:translateY(-3px)}
-.subscriber-achievement strong{color:#24476d;font-family:"Barlow Condensed",Impact,sans-serif;font-size:1.25rem;text-transform:uppercase}
-.subscriber-achievement span{color:#476686;font-size:.68rem;font-weight:800}
-.subscriber-progress{width:100%;height:8px;margin-top:5px;overflow:hidden;border:0;border-radius:99px;background:#a9bfd8}
-.subscriber-progress::-webkit-progress-bar{border-radius:99px;background:#a9bfd8}
-.subscriber-progress::-webkit-progress-value{border-radius:99px;background:linear-gradient(90deg,#8bb8ed,#c9e8ff)}
-.subscriber-progress::-moz-progress-bar{border-radius:99px;background:linear-gradient(90deg,#8bb8ed,#c9e8ff)}
-.subscriber-milestone-status{min-height:1.3em;margin:0;color:#345577;font-size:.72rem;font-weight:900}
+.subscriber-platforms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.subscriber-platform{display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:15px;padding:clamp(14px,2.2vw,22px);border:1px solid #7198c665;background:#ffffff85}
+.subscriber-platform--tiktok{box-shadow:inset 0 3px #25f4ee}
+.subscriber-platform--twitch{box-shadow:inset 0 3px #9146ff}
+.subscriber-platform-heading{display:flex;align-items:center;gap:11px}
+.subscriber-platform-mark{display:grid;width:40px;height:40px;flex:none;place-items:center;border-radius:10px;background:#12253d;color:#fff;font-size:1.25rem;font-weight:900}
+.subscriber-platform--tiktok .subscriber-platform-mark{text-shadow:-2px 0 #25f4ee,2px 0 #fe2c55}
+.subscriber-platform--twitch .subscriber-platform-mark{background:#9146ff}
+.subscriber-platform-heading h3{margin:0;color:#102844;font-size:1rem}
+.subscriber-platform-heading p{margin:2px 0 0;color:#58708a;font-size:.68rem}
+.subscriber-platform-count{color:#163960;font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(2rem,4vw,3rem);line-height:1}
+.subscriber-platform-link{display:inline-flex;min-height:40px;align-items:center;padding:8px 11px;border:1px solid #a9c8e9;background:#f4f9ff;color:#17395e;font-size:.72rem;font-weight:900;text-decoration:none}
+.subscriber-platform-link:hover{border-color:#377bbd;background:#e7f2ff}
+.subscriber-platform-link:focus-visible{outline:2px solid #377bbd;outline-offset:3px}
 .moderator-workspace{display:grid;gap:16px}
 .moderator-workspace[hidden]{display:none}
 .moderator-guidelines ul{display:grid;gap:10px;padding-left:20px;color:var(--page-muted,#a1b6cc);font-size:.83rem}
@@ -142,7 +135,8 @@ body{isolation:isolate}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:600px){.game-panel-heading{align-items:flex-start;flex-direction:column}.game-tab{flex:1;padding:10px 7px}.game-submit-form{padding:13px}}
 @media(max-width:760px){.account-panel{grid-template-columns:1fr}}
-@media(max-width:700px){.subscriber-card{grid-template-columns:1fr}.subscriber-achievement{max-width:340px;margin:auto}}
+@media(max-width:700px){.subscriber-card{grid-template-columns:1fr}}
+@media(max-width:420px){.subscriber-platforms{grid-template-columns:1fr}}
 @media(max-width:680px){.xbox-profile-grid{grid-template-columns:1fr}}
 @media(max-width:540px){.nav-menu{overflow-x:auto;white-space:nowrap;scrollbar-width:thin}.feature-card{padding:16px}}
 @media(max-width:650px){.private-messaging-layout{grid-template-columns:1fr}.admin-user-card{align-items:flex-start;flex-direction:column}}
