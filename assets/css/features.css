@@ -36,9 +36,9 @@ body{isolation:isolate}
 .xbox-gamertag{margin:12px 3px 5px;color:#effff3;font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(2.7rem,7vw,4.4rem);font-weight:900;letter-spacing:1px;line-height:1.05;overflow-wrap:anywhere}
 .xbox-copy-status{margin-top:12px}
 .subscriber-card{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:center;overflow:hidden;padding:clamp(20px,4vw,34px);border:1px solid #8bdcff45;background:transparent;color:#eff8ff;box-shadow:none}
-.subscriber-card:before,.subscriber-card:after{position:absolute;z-index:-1;width:64px;height:170px;background:linear-gradient(180deg,#f4fdff,#76dbff 42%,#168fff);clip-path:polygon(55% 0,100% 0,68% 39%,96% 39%,12% 100%,39% 55%,4% 55%);content:"";filter:drop-shadow(0 0 16px #36baff)}
-.subscriber-card:before{top:4%;left:31%;animation:subscriber-lightning 9s linear infinite}
-.subscriber-card:after{top:40%;right:24%;width:42px;height:116px;animation:subscriber-lightning 12s linear 4.3s infinite}
+.subscriber-card:before,.subscriber-card:after{position:absolute;z-index:-1;width:100px;height:230px;background:url("../images/subscriber-lightning.svg") center/contain no-repeat;content:"";filter:drop-shadow(0 0 5px #8beaff) drop-shadow(0 0 18px #168fff)}
+.subscriber-card:before{top:0;left:30%;animation:subscriber-lightning 10s linear infinite}
+.subscriber-card:after{top:20%;right:15%;width:78px;height:185px;transform:scaleX(-1) rotate(8deg);animation:subscriber-lightning 13s linear 5.2s infinite}
 .subscriber-card h2{margin:5px 0 10px;color:#f2f9ff;font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(2rem,5vw,3.3rem);line-height:.95;text-transform:uppercase}
 .subscriber-card .page-kicker{color:#9bdfff}
 .subscriber-card-copy>p{max-width:610px;color:#d0e4f5;font-size:.84rem}
@@ -57,7 +57,7 @@ body{isolation:isolate}
 .subscriber-platform-link{display:inline-flex;min-height:40px;align-items:center;padding:8px 11px;border:1px solid #91dfff80;background:#0c2236b8;color:#e8f8ff;font-size:.72rem;font-weight:900;text-decoration:none}
 .subscriber-platform-link:hover{border-color:#c4f0ff;background:#123653e0}
 .subscriber-platform-link:focus-visible{outline:2px solid #377bbd;outline-offset:3px}
-@keyframes subscriber-lightning{0%,4%,6%,100%{opacity:0}4.5%{opacity:.9}5%{opacity:.12}5.5%{opacity:.75}6%{opacity:0}}
+@keyframes subscriber-lightning{0%,72%,100%{opacity:0}73%{opacity:.95}73.4%{opacity:.12}73.8%{opacity:.85}74.3%{opacity:.24}74.8%{opacity:.75}75.5%{opacity:0}}
 .moderator-workspace{display:grid;gap:16px}
 .moderator-workspace[hidden]{display:none}
 .moderator-guidelines ul{display:grid;gap:10px;padding-left:20px;color:var(--page-muted,#a1b6cc);font-size:.83rem}
@@ -139,7 +139,7 @@ body{isolation:isolate}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:600px){.game-panel-heading{align-items:flex-start;flex-direction:column}.game-tab{flex:1;padding:10px 7px}.game-submit-form{padding:13px}}
 @media(max-width:760px){.account-panel{grid-template-columns:1fr}}
-@media(max-width:700px){.subscriber-card{grid-template-columns:1fr}.subscriber-card:before{left:72%;top:4%;width:42px;height:115px}.subscriber-card:after{right:8%;top:50%;width:32px;height:88px}}
+@media(max-width:700px){.subscriber-card{grid-template-columns:1fr}.subscriber-card:before{left:72%;top:4%;width:72px;height:165px}.subscriber-card:after{right:8%;top:50%;width:54px;height:130px}}
 @media(max-width:420px){.subscriber-platforms{grid-template-columns:1fr}}
 @media(max-width:680px){.xbox-profile-grid{grid-template-columns:1fr}}
 @media(max-width:540px){.nav-menu{overflow-x:auto;white-space:nowrap;scrollbar-width:thin}.feature-card{padding:16px}}
