@@ -93,7 +93,7 @@ subscribeButton.addEventListener("click", async () => {
 
 async function initialize() {
   if (!config?.supabaseUrl || !config?.supabaseAnonKey) {
-    status.textContent = "Compteur de départ : 1 998, comme tu l’as indiqué. Configure Supabase pour activer les abonnements et le compteur partagé.";
+    status.textContent = "Le compteur démarre à zéro. Configure Supabase pour activer les abonnements et le compteur partagé.";
     subscribeButton.disabled = true;
     subscribeButton.textContent = "Abonnement bientôt disponible";
     return;

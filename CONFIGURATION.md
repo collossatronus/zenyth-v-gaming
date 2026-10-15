@@ -30,8 +30,8 @@ La fonction vérifie la session Supabase et signe les jetons LiveKit côté serv
 
 ## Abonnements au site et trophée des 2 000
 
-1. Applique aussi `supabase/migrations/20261015000002_creator_subscriptions.sql` avec `supabase db push`. La migration crée un compteur public et des abonnements uniques par compte ; un membre doit être connecté pour s’abonner depuis le bouton Z éclair de l’accueil.
-2. Le compteur part de 1 998, nombre de départ indiqué par le propriétaire, puis ajoute les comptes abonnés au site. Il n’est pas relié en temps réel à YouTube et ne vérifie pas les abonnements YouTube. Le lien YouTube reste disponible séparément sur l’accueil.
+1. Applique les migrations avec `supabase db push`, notamment `supabase/migrations/20261015000002_creator_subscriptions.sql` et `supabase/migrations/20261015000003_reset_creator_subscriber_count.sql`. Elles créent le compteur public, démarrent le total à zéro et enregistrent des abonnements uniques par compte ; un membre doit être connecté pour s’abonner depuis le bouton Z éclair de l’accueil.
+2. Le compteur démarre à zéro et ajoute les comptes abonnés au site. Il n’est pas relié en temps réel à YouTube et ne vérifie pas les abonnements YouTube. Le lien YouTube reste disponible séparément sur l’accueil.
 3. Le trophée manette blanche et bleu pastel se débloque lorsque le compteur atteint 2 000. La page affiche aussi la progression restante.
 4. La page [moderateurs.html](./moderateurs.html) est réservée visuellement aux comptes ayant le rôle `moderator` ou `owner`. Elle rassemble la file de modération et les consignes ; les décisions restent contrôlées par les politiques RLS et la page [moderation.html](./moderation.html).
 
