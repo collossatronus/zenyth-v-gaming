@@ -35,7 +35,7 @@ body{isolation:isolate}
 .xbox-platform-icon{border-color:#67d68a88;background:#102b1b;color:#76e89a;text-shadow:0 0 12px #42d97566}
 .xbox-gamertag{margin:12px 3px 5px;color:#effff3;font-family:"Barlow Condensed",Impact,sans-serif;font-size:clamp(2.7rem,7vw,4.4rem);font-weight:900;letter-spacing:1px;line-height:1.05;overflow-wrap:anywhere}
 .xbox-copy-status{margin-top:12px}
-.subscriber-card{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:center;overflow:hidden;padding:clamp(20px,4vw,34px);border:1px solid #8bdcff45;background:linear-gradient(135deg,#07132135,#0b1a2a45);color:#eff8ff;box-shadow:0 18px 45px #0002;backdrop-filter:blur(2px)}
+.subscriber-card{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:center;overflow:hidden;padding:clamp(20px,4vw,34px);border:1px solid #8bdcff45;background:transparent;color:#eff8ff;box-shadow:none}
 .subscriber-card:before,.subscriber-card:after{position:absolute;z-index:-1;width:64px;height:170px;background:linear-gradient(180deg,#f4fdff,#76dbff 42%,#168fff);clip-path:polygon(55% 0,100% 0,68% 39%,96% 39%,12% 100%,39% 55%,4% 55%);content:"";filter:drop-shadow(0 0 16px #36baff)}
 .subscriber-card:before{top:4%;left:31%;animation:subscriber-lightning 9s linear infinite}
 .subscriber-card:after{top:40%;right:24%;width:42px;height:116px;animation:subscriber-lightning 12s linear 4.3s infinite}
@@ -44,7 +44,7 @@ body{isolation:isolate}
 .subscriber-card-copy>p{max-width:610px;color:#d0e4f5;font-size:.84rem}
 .subscriber-disclaimer{font-size:.68rem}
 .subscriber-platforms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.subscriber-platform{display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:15px;padding:clamp(14px,2.2vw,22px);border:1px solid #9bdfff48;background:#07132172;backdrop-filter:blur(3px)}
+.subscriber-platform{display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:15px;padding:clamp(14px,2.2vw,22px);border:1px solid #9bdfff48;background:transparent}
 .subscriber-platform--tiktok{box-shadow:inset 0 3px #25f4ee}
 .subscriber-platform--twitch{box-shadow:inset 0 3px #9146ff}
 .subscriber-platform-heading{display:flex;align-items:center;gap:11px}
