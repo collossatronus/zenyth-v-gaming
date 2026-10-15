@@ -19,23 +19,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+  <script type="module" src="assets/js/community-feed.js"></script>
 </head>
 <body>
-<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html" aria-current="page">Communauté</a><a class="button" href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">Discord ↗</a></nav></div></header>
+<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="fortnite.html">Fortnite</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html" aria-current="page">Communauté</a><a href="appels.html">Appels</a><a href="messages.html">Messages privés</a><a href="dons.html">Dons</a><a href="compte.html">Mon compte</a><a class="button" href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">Discord ↗</a></nav></div></header>
 <main>
   <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // COMMUNITY FEED</div><h1 class="page-title">Le chat continue.<br><span>À toi la parole.</span></h1><p class="page-lede">Pose une question, partage une idée ou raconte un moment de jeu. La team fait vivre le QG, en live comme entre les lives.</p><div class="community-actions"><a class="button" href="#ecrire">Écrire un message ↓</a><a class="button secondary" href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">Rejoindre le Discord ↗</a></div></div></section>
   <section class="content-section" id="ecrire"><div class="wrap community-layout">
     <div>
       <div class="community-compose"><div class="page-kicker">Ton message</div><h2>Question ou publication ?</h2><p>Choisis un sujet, signe avec ton pseudo et poste ton message.</p>
         <form class="community-form" id="community-form">
-          <label>Pseudo<input id="entry-author" name="author" type="text" maxlength="28" placeholder="Ton pseudo" required></label>
           <label>Type de message<select id="entry-type" name="type"><option value="question">Question</option><option value="publication">Publication</option></select></label>
           <label>Sujet<input id="entry-title" name="title" type="text" maxlength="70" placeholder="Le sujet en quelques mots" required></label>
           <label>Message<textarea id="entry-body" name="body" maxlength="500" placeholder="Écris ton message (500 caractères max)" required></textarea></label>
-          <button class="button" type="submit">Publier sur cet appareil</button>
+          <button class="button" type="submit" disabled>Envoyer pour validation</button>
+          <a class="button secondary" id="community-login-link" href="compte.html">Connecte-toi pour publier</a>
           <p class="community-status" id="community-status" role="status" aria-live="polite"></p>
         </form>
-        <p class="community-note">Mode aperçu : les messages sont enregistrés uniquement dans ce navigateur et ne sont pas visibles par tes followers. Pour une publication réellement partagée, il faut connecter un service de stockage en ligne et prévoir une modération.</p>
+        <p class="community-note">Les messages de la communauté sont partagés sur le site après validation. Connecte-toi avec ton compte pour publier.</p>
       </div>
       <div class="community-feed" style="margin-top:18px">
         <div class="community-feed-head"><h2>Le fil du QG</h2><div class="community-tabs" role="group" aria-label="Filtrer les messages"><button class="community-tab" type="button" data-filter="all" aria-pressed="true">Tout</button><button class="community-tab" type="button" data-filter="question" aria-pressed="false">Questions</button><button class="community-tab" type="button" data-filter="publication" aria-pressed="false">Publications</button></div></div>
@@ -48,103 +52,10 @@
         <details><summary>Où trouver les replays TikTok ?</summary><p>Ouvre le profil <a class="stream-link" href="https://www.tiktok.com/@.matth_f.g_" target="_blank" rel="noopener">@.matth_f.g_ ↗</a>. TikTok ne permet pas d’intégrer son lecteur LIVE public ici.</p></details>
         <details><summary>Comment rejoindre les sessions ?</summary><p>Rejoins le <a class="stream-link" href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">serveur Discord ↗</a> et passe dire bonjour.</p></details>
       </section>
-      <section class="faq-list"><div class="page-kicker">Un message privé ?</div><h2 class="faq-title">On se parle.</h2><p class="section-intro">Pour une question personnelle, contacte Zenyth_V directement sur Discord.</p><a class="button" href="https://discord.com/users/1077831338855497729" target="_blank" rel="noopener">Écrire en privé ↗</a></section>
+      <section class="faq-list"><div class="page-kicker">Un message privé ?</div><h2 class="faq-title">On se parle.</h2><p class="section-intro">Écris à Zenyth_V en privé ou retrouve tes conversations privées avec les membres connectés.</p><a class="button" href="messages.html">Ouvrir les messages privés ↗</a></section>
     </aside>
   </div></section>
 </main>
 <footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="index.html">Accueil</a> · <a href="live.html">Lives</a> · <a href="outils.html">Outils</a></span></div></footer>
-<script>
-  const storageKey = 'zenyth-v-community-entries';
-  const entryList = document.getElementById('entry-list');
-  const communityForm = document.getElementById('community-form');
-  const communityStatus = document.getElementById('community-status');
-  let activeFilter = 'all';
-  let entries = [];
-
-  try {
-    const savedEntries = JSON.parse(localStorage.getItem(storageKey));
-    entries = Array.isArray(savedEntries) ? savedEntries.filter((entry) => entry && typeof entry.id === 'string' && typeof entry.body === 'string') : [];
-  } catch {
-    entries = [];
-  }
-
-  function saveEntries() {
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(entries));
-      return true;
-    } catch {
-      communityStatus.textContent = 'Le navigateur ne permet pas d’enregistrer ce message.';
-      return false;
-    }
-  }
-
-  function renderEntries() {
-    entryList.replaceChildren();
-    const visibleEntries = entries.filter((entry) => activeFilter === 'all' || entry.type === activeFilter).sort((first, second) => second.createdAt - first.createdAt);
-    if (visibleEntries.length === 0) {
-      const empty = document.createElement('p');
-      empty.className = 'entry-empty';
-      empty.textContent = activeFilter === 'all' ? 'Le fil est calme pour le moment. Lance la conversation !' : 'Aucun message dans cette catégorie sur cet appareil.';
-      entryList.append(empty);
-      return;
-    }
-
-    visibleEntries.forEach((entry) => {
-      const card = document.createElement('article');
-      card.className = 'entry-card';
-      const header = document.createElement('div');
-      header.className = 'entry-card-top';
-      const type = document.createElement('span');
-      type.className = 'entry-type';
-      type.textContent = entry.type === 'question' ? 'Question' : 'Publication';
-      const byline = document.createElement('span');
-      byline.textContent = `${entry.author} · ${new Date(entry.createdAt).toLocaleString('fr-FR')}`;
-      header.append(type, byline);
-      const title = document.createElement('h3');
-      title.textContent = entry.title;
-      const body = document.createElement('p');
-      body.textContent = entry.body;
-      const remove = document.createElement('button');
-      remove.type = 'button';
-      remove.className = 'entry-delete';
-      remove.textContent = 'Supprimer sur cet appareil';
-      remove.addEventListener('click', () => {
-        entries = entries.filter((item) => item.id !== entry.id);
-        saveEntries();
-        renderEntries();
-      });
-      card.append(header, title, body, remove);
-      entryList.append(card);
-    });
-  }
-
-  communityForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const author = document.getElementById('entry-author').value.trim();
-    const type = document.getElementById('entry-type').value;
-    const title = document.getElementById('entry-title').value.trim();
-    const body = document.getElementById('entry-body').value.trim();
-    if (!author || !title || body.length < 3) {
-      communityStatus.textContent = 'Ajoute ton pseudo, un sujet et un message avant de publier.';
-      return;
-    }
-    entries.push({ id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, author, type, title, body, createdAt: Date.now() });
-    if (!saveEntries()) return;
-    renderEntries();
-    communityForm.reset();
-    communityStatus.textContent = 'Message ajouté au fil local de cet appareil.';
-  });
-
-  document.querySelectorAll('[data-filter]').forEach((button) => {
-    button.addEventListener('click', () => {
-      activeFilter = button.dataset.filter;
-      document.querySelectorAll('[data-filter]').forEach((tab) => tab.setAttribute('aria-pressed', String(tab === button)));
-      renderEntries();
-    });
-  });
-
-  document.querySelector('[data-year]').textContent = new Date().getFullYear();
-  renderEntries();
-</script>
 </body>
 </html>

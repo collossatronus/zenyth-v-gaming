@@ -109,6 +109,11 @@
     .game-dialog h2{margin:6px 0 8px;font-size:3rem}
     .game-dialog-close{width:40px;height:40px;border:1px solid #65c9ff55;background:#0a1a29;color:#eaf8ff;font-size:1.5rem;cursor:pointer}
     .game-dialog-description{color:#bed1e3;font-size:.9rem}
+    .game-dialog-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+    .game-dialog-gallery[hidden]{display:none}
+    .game-dialog-gallery figure{min-width:0;margin:0;border:1px solid #65caff38;background:#06101b}
+    .game-dialog-gallery img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+    .game-dialog-gallery figcaption{padding:8px 9px;color:#b8cce0;font-size:.68rem}
     .game-tips{display:grid;gap:10px;margin:20px 0;padding:0;list-style:none}
     .game-tips li{position:relative;padding:12px 14px 12px 34px;border:1px solid #65caff24;background:#0a1724;color:#d8e7f4;font-size:.82rem}
     .game-tips li:before{content:"✦";position:absolute;left:13px;color:#83ddff}
@@ -275,6 +280,7 @@
     .hero:after{display:none}
     @media(max-width:680px){nav{flex-wrap:wrap;gap:10px;padding:10px 0}.navlinks{order:3;display:flex;width:100%;justify-content:space-between;gap:8px;overflow-x:auto;padding-bottom:5px;font-size:.67rem}.navlinks a{white-space:nowrap}}
   </style>
+  <link rel="stylesheet" href="assets/css/features.css">
 </head>
 <body>
 <div class="topline"><div class="wrap"><span class="live-dot" aria-hidden="true"></span> Le QG gaming de Zenyth_V <span aria-hidden="true">//</span> Toujours prêts à jouer</div></div>
@@ -282,7 +288,7 @@
   <div class="wrap">
     <nav aria-label="Navigation principale">
       <a class="logo" href="#accueil">ZENYTH<span>_V</span></a>
-      <div class="navlinks"><a href="#univers">Univers</a><a href="#setup">Setup</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="#discord">Discord</a></div>
+      <div class="navlinks"><a href="#univers">Univers</a><a href="jeux.html">Jeux</a><a href="#setup">Setup</a><a href="fortnite.html">Fortnite</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="appels.html">Appels</a><a href="messages.html">Messages</a><a href="dons.html">Dons</a><a href="compte.html">Mon compte</a><a href="#discord">Discord</a></div>
       <a class="btn nav-cta" href="https://twitch.tv/Zenyth_V" target="_blank" rel="noopener">▶ Twitch</a>
     </nav>
   </div>
@@ -314,11 +320,11 @@
   </div>
   <section class="games" id="univers">
     <div class="wrap">
-      <div class="section-head"><div><div class="kicker">Mes univers de jeu</div><h2>Quatre mondes. Même pilote.</h2></div><p>Des routes à avaler, des étoiles à explorer et des histoires de science-fiction où se perdre.</p></div>
+      <div class="section-head"><div><div class="kicker">Mes univers de jeu</div><h2>Quatre mondes. Même pilote.</h2></div><p>Des routes à avaler, des étoiles à explorer et des histoires de science-fiction où se perdre. <a href="jeux.html" style="color:var(--cyan);font-weight:800">Voir tous mes jeux ↗</a></p></div>
       <div class="game-grid">
         <article class="game-card" data-number="01" style="--glow:#168fff42;background-image:linear-gradient(145deg,#08111ce8,#08111ca8),url('assets/images/435.png');background-size:cover;background-position:left bottom"><div class="game-top"><span>Course · monde ouvert</span><span>01 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🏁</div><h3>The Crew 2</h3><p>Routes, grands espaces et virées à travers les États-Unis.</p></div><button class="game-open" type="button" data-game="crew2" aria-haspopup="dialog">Fiche joueur ↗</button></article>
         <article class="game-card" data-number="02" style="--glow:#00d4ff35;background-image:linear-gradient(145deg,#08111ce8,#08111ca8),url('assets/images/435.png');background-size:cover;background-position:center bottom"><div class="game-top"><span>Course · vitesse</span><span>02 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🚘</div><h3>Need for Speed</h3><p>La vitesse, les néons et la ligne d’arrivée dans le rétro.</p></div><button class="game-open" type="button" data-game="nfs" aria-haspopup="dialog">Fiche joueur ↗</button></article>
-        <article class="game-card" data-number="03" style="--glow:#47c8ff35;background-image:linear-gradient(145deg,#08111cbd,#08111c9c),url('assets/images/435.png');background-size:cover;background-position:center top"><div class="game-top"><span>Exploration · infini</span><span>03 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🌌</div><h3>No Man’s Sky</h3><p>Des systèmes à découvrir, des planètes à explorer, sans itinéraire imposé.</p></div><button class="game-open" type="button" data-game="nms" aria-haspopup="dialog">Fiche joueur ↗</button></article>
+        <article class="game-card" data-number="03" style="--glow:#47c8ff35;background-image:linear-gradient(145deg,#08111cbd,#08111c9c),url('assets/images/1000001001.png');background-size:cover;background-position:center"><div class="game-top"><span>Exploration · infini</span><span>03 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🌌</div><h3>No Man’s Sky</h3><p>Des systèmes à découvrir, des planètes à explorer, sans itinéraire imposé.</p></div><button class="game-open" type="button" data-game="nms" aria-haspopup="dialog">Fiche joueur ↗</button></article>
         <article class="game-card" data-number="04" style="--glow:#ff9c4a28;background-image:linear-gradient(145deg,#08111ce8,#08111ca8),url('assets/images/435.png');background-size:cover;background-position:right top"><div class="game-top"><span>Science-fiction · étoiles</span><span>04 / 04</span></div><div><div class="game-symbol" aria-hidden="true">🚀</div><h3>Starfield</h3><p>Une autre frontière, des mondes lointains et une grande aventure spatiale.</p></div><button class="game-open" type="button" data-game="starfield" aria-haspopup="dialog">Fiche joueur ↗</button></article>
       </div>
     </div>
@@ -327,6 +333,7 @@
     <div class="game-dialog-shell">
       <div class="game-dialog-top"><div><div class="kicker" id="game-dialog-kicker">Fiche jeu</div><h2 id="game-dialog-title"></h2></div><form method="dialog"><button class="game-dialog-close" type="submit" aria-label="Fermer la fiche">×</button></form></div>
       <p class="game-dialog-description" id="game-dialog-description"></p>
+      <div class="game-dialog-gallery" id="game-dialog-gallery" hidden aria-label="Captures de No Man’s Sky"></div>
       <ul class="game-tips" id="game-dialog-tips"></ul>
       <a class="btn" id="game-dialog-link" href="#" target="_blank" rel="noopener">Site officiel ↗</a>
     </div>
@@ -415,7 +422,7 @@
     <span class="mascot-boot left" aria-hidden="true"></span><span class="mascot-boot right" aria-hidden="true"></span>
   </button>
 </div>
-<footer><div class="wrap foot"><span>© <span id="year"></span> ZENYTH_V GAMING</span><span><a href="live.html">Lives</a> · <a href="outils.html">Outils</a> · <a href="communaute.html">Communauté</a> · <a href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">Discord ↗</a></span></div></footer>
+<footer><div class="wrap foot"><span>© <span id="year"></span> ZENYTH_V GAMING</span><span><a href="live.html">Lives</a> · <a href="jeux.html">Jeux</a> · <a href="communaute.html">Communauté</a> · <a href="messages.html">Messages privés</a> · <a href="https://discord.gg/x7bpXeksh" target="_blank" rel="noopener">Discord ↗</a></span></div></footer>
 <script>
   const socialList = document.getElementById('social-list');
   const socialForm = document.getElementById('social-form');
@@ -448,6 +455,11 @@
       title: 'No Man’s Sky',
       description: 'Explore un univers généré à l’infini, découvre des planètes, collecte des ressources et construis tes propres bases.',
       tips: ['Scanne les ressources et les lieux d’intérêt avant de quitter une planète.', 'Garde du carburant et des matériaux de réparation pour les déplacements.', 'La construction de base et les missions d’introduction donnent de bons repères.'],
+      images: [
+        { src: 'assets/images/1000001001.png', alt: 'Vaisseau spatial devant un portail lumineux dans No Man’s Sky', caption: 'Passage à travers un portail' },
+        { src: 'assets/images/1000001002.png', alt: 'Vaisseau de No Man’s Sky dans un tunnel de lumière', caption: 'Voyage entre les étoiles' },
+        { src: 'assets/images/1000001003.png', alt: 'Explorateur dans une station spatiale de No Man’s Sky', caption: 'Exploration de station' }
+      ],
       url: 'https://www.nomanssky.com/'
     },
     starfield: {
@@ -466,6 +478,20 @@
       document.getElementById('game-dialog-title').textContent = game.title;
       document.getElementById('game-dialog-description').textContent = game.description;
       document.getElementById('game-dialog-link').href = game.url;
+      const gallery = document.getElementById('game-dialog-gallery');
+      gallery.replaceChildren();
+      gallery.hidden = !game.images?.length;
+      game.images?.forEach((image) => {
+        const figure = document.createElement('figure');
+        const photo = document.createElement('img');
+        photo.src = image.src;
+        photo.alt = image.alt;
+        photo.loading = 'lazy';
+        const caption = document.createElement('figcaption');
+        caption.textContent = image.caption;
+        figure.append(photo, caption);
+        gallery.append(figure);
+      });
       const tips = document.getElementById('game-dialog-tips');
       tips.replaceChildren();
       game.tips.forEach((tip) => {
@@ -780,5 +806,7 @@
   document.getElementById('year').textContent = new Date().getFullYear();
   renderLinks();
 </script>
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/site.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Gestion privée des comptes, modérateurs et publications de la communauté ZENYTH_V.">
+  <title>Administration privée | ZENYTH_V Gaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="communaute.html">Communauté</a><a href="messages.html">Messages</a><a href="compte.html">Connexion</a></nav></div></header>
+<main>
+  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // ACCÈS PROPRIÉTAIRE</div><h1 class="page-title">Console de gestion.<br><span>Privée.</span></h1><p class="page-lede">Gère les comptes et les rôles de modérateur. Cette page exige le compte propriétaire, puis un code vérifié côté serveur.</p></div></section>
+  <section class="content-section"><div class="wrap">
+    <section class="feature-card">
+      <form class="feature-form" id="admin-code-form">
+        <label for="admin-code">Code secret propriétaire<input id="admin-code" type="password" autocomplete="current-password" required disabled></label>
+        <button class="button" type="submit" disabled>Vérifier et ouvrir</button>
+      </form>
+      <p class="feature-status" id="admin-status" role="status" aria-live="polite">Vérification du compte propriétaire…</p>
+    </section>
+    <section class="feature-card admin-users" id="admin-users" hidden>
+      <div class="admin-users-heading"><div><div class="page-kicker">Gestion des membres</div><h2>Comptes et modérateurs.</h2></div><div class="feature-actions"><button class="button secondary" type="button" id="previous-page" disabled>Précédents</button><button class="button secondary" type="button" id="next-page">Suivants</button><button class="button secondary" type="button" id="admin-sign-out">Déconnexion</button></div></div>
+      <div class="admin-user-list" id="admin-user-list"></div>
+    </section>
+  </div></section>
+</main>
+<footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="communaute.html">Communauté</a> · <a href="messages.html">Messages</a></span></div></footer>
+<script type="module">
+  const config = window.ZENYTH_CONFIG;
+  const status = document.getElementById("admin-status");
+  const form = document.getElementById("admin-code-form");
+  const codeInput = document.getElementById("admin-code");
+  const usersPanel = document.getElementById("admin-users");
+  const userList = document.getElementById("admin-user-list");
+  const previousButton = document.getElementById("previous-page");
+  const nextButton = document.getElementById("next-page");
+  let client;
+  let accessCode = "";
+  let page = 1;
+  let hasMore = false;
+
+  document.querySelector("[data-year]").textContent = new Date().getFullYear();
+
+  function showDenied(message) {
+    status.textContent = message;
+    form.hidden = true;
+    usersPanel.hidden = true;
+  }
+
+  function renderUsers(users) {
+    if (!users.length) {
+      const empty = document.createElement("p");
+      empty.className = "game-empty";
+      empty.textContent = "Aucun compte sur cette page.";
+      userList.replaceChildren(empty);
+      return;
+    }
+    userList.replaceChildren(...users.map((user) => {
+      const card = document.createElement("article");
+      card.className = "admin-user-card";
+      const details = document.createElement("div");
+      const email = document.createElement("strong");
+      email.textContent = user.email || "Email non renseigné";
+      const info = document.createElement("p");
+      const role = user.role === "owner" ? "Propriétaire" : user.role === "moderator" ? "Modérateur" : "Membre";
+      const state = user.banned_until && new Date(user.banned_until) > new Date() ? "Suspendu" : "Actif";
+      info.textContent = `${role} · ${state} · Créé le ${new Date(user.created_at).toLocaleDateString("fr-FR")}`;
+      details.append(email, info);
+      card.append(details);
+      if (user.role !== "owner") {
+        const controls = document.createElement("div");
+        controls.className = "feature-actions";
+        const moderatorButton = document.createElement("button");
+        moderatorButton.type = "button";
+        moderatorButton.className = "button secondary";
+        moderatorButton.textContent = user.role === "moderator" ? "Retirer le rôle modo" : "Nommer modo";
+        moderatorButton.addEventListener("click", () => runAction(user.role === "moderator" ? "remove-moderator" : "make-moderator", user.id));
+        const banButton = document.createElement("button");
+        banButton.type = "button";
+        banButton.className = "button secondary";
+        banButton.textContent = state === "Suspendu" ? "Réactiver le compte" : "Suspendre 30 jours";
+        banButton.addEventListener("click", () => runAction(state === "Suspendu" ? "unban-user" : "ban-user", user.id));
+        controls.append(moderatorButton, banButton);
+        card.append(controls);
+      }
+      return card;
+    }));
+  }
+
+  async function callAdmin(body) {
+    const { data, error } = await client.functions.invoke("admin-user-management", {
+      body,
+      headers: { "x-admin-code": accessCode }
+    });
+    if (error) throw new Error(error.message);
+    return data;
+  }
+
+  async function loadUsers() {
+    status.textContent = "Chargement des comptes…";
+    try {
+      const data = await callAdmin({ action: "list-users", page });
+      hasMore = data.hasMore;
+      renderUsers(data.users);
+      previousButton.disabled = page <= 1;
+      nextButton.disabled = !hasMore;
+      status.textContent = `Page ${page} · ${data.users.length} compte(s) affiché(s).`;
+    } catch (error) {
+      status.textContent = `Chargement refusé ou indisponible : ${error.message}`;
+      if (page === 1) usersPanel.hidden = true;
+    }
+  }
+
+  async function runAction(action, userId) {
+    if (!window.confirm("Confirmer cette modification du compte ?")) return;
+    status.textContent = "Mise à jour du compte…";
+    try {
+      await callAdmin({ action, userId });
+      status.textContent = "Compte mis à jour.";
+      await loadUsers();
+    } catch (error) {
+      status.textContent = `Modification impossible : ${error.message}`;
+    }
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!client) return;
+    accessCode = codeInput.value;
+    codeInput.value = "";
+    status.textContent = "Vérification du code côté serveur…";
+    try {
+      await callAdmin({ action: "list-users", page: 1 });
+      page = 1;
+      usersPanel.hidden = false;
+      form.hidden = true;
+      await loadUsers();
+    } catch (error) {
+      accessCode = "";
+      status.textContent = `Accès refusé : ${error.message}`;
+    }
+  });
+
+  previousButton.addEventListener("click", async () => { page = Math.max(1, page - 1); await loadUsers(); });
+  nextButton.addEventListener("click", async () => { if (hasMore) page += 1; await loadUsers(); });
+  document.getElementById("admin-sign-out").addEventListener("click", async () => {
+    accessCode = "";
+    usersPanel.hidden = true;
+    form.hidden = false;
+    await client.auth.signOut();
+  });
+
+  if (!config?.supabaseUrl || !config?.supabaseAnonKey) {
+    showDenied("La connexion Supabase n’est pas configurée.");
+  } else {
+    try {
+      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      client = createClient(config.supabaseUrl, config.supabaseAnonKey);
+      const { data, error } = await client.auth.getSession();
+      if (error) throw error;
+      if (data.session?.user.app_metadata?.role !== "owner") {
+        showDenied(data.session ? "Accès refusé : ce compte n’a pas le rôle propriétaire." : "Connecte-toi avec le compte propriétaire, puis recharge cette page.");
+      } else {
+        codeInput.disabled = false;
+        form.querySelector("button").disabled = false;
+        status.textContent = "Compte propriétaire vérifié. Saisis le code secret.";
+      }
+      client.auth.onAuthStateChange((_event, session) => {
+        if (session?.user.app_metadata?.role !== "owner") {
+          accessCode = "";
+          showDenied("Session propriétaire terminée. Reconnecte-toi pour continuer.");
+        }
+      });
+    } catch (error) {
+      showDenied(`Vérification de la connexion impossible : ${error.message}`);
+    }
+  }
+</script>
+</body>
+</html>

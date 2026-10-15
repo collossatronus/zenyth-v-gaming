@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Crée une salle d’appel audio/vidéo et retrouve tes amis sur le site ZENYTH_V.">
+  <title>Appels communautaires | ZENYTH_V Gaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="fortnite.html">Fortnite</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="appels.html" aria-current="page">Appels</a><a href="messages.html">Messages</a><a href="dons.html">Dons</a><a class="button" href="compte.html">Mon compte</a></nav></div></header>
+<main>
+  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // SALON VOCAL</div><h1 class="page-title">On se retrouve.<br><span>En direct.</span></h1><p class="page-lede">Connecte-toi, crée une salle et partage son lien avec les personnes que tu veux inviter. L’hôte doit rester dans la salle pour que l’appel ait lieu.</p></div></section>
+  <section class="content-section"><div class="wrap">
+    <section class="feature-card">
+      <div class="page-kicker">Appel privé par lien</div><h2>Crée ou rejoins une salle.</h2>
+      <p>Le lien de la salle donne accès à l’appel à toute personne qui le reçoit. Ne le partage qu’avec les personnes de confiance. Ton micro et ta caméra ne s’activent qu’après ton accord dans le navigateur.</p>
+      <div class="feature-form">
+        <label for="room-name">Code de salle<input id="room-name" maxlength="64" autocomplete="off" placeholder="Crée une salle ou colle un code"></label>
+        <div class="feature-actions"><button class="button secondary" id="create-room" type="button">Créer une salle</button><button class="button" id="join-room" type="button">Rejoindre l’appel</button><button class="button secondary" id="copy-room" type="button" disabled>Copier le lien</button><button class="button secondary" id="leave-room" type="button" disabled>Quitter</button></div>
+        <p class="feature-status" id="call-status" role="status" aria-live="polite">La connexion, le service d’appel et la fonction sécurisée doivent être configurés avant de démarrer un appel.</p>
+      </div>
+      <div class="call-grid" id="call-grid" aria-live="polite"></div>
+    </section>
+    <div class="feature-note">Appels audio/vidéo réservés aux comptes connectés. Les appels utilisent la connexion et le matériel de ton appareil. Respecte le consentement de chacun ; quitte ou signale tout appel indésirable. Besoin d’un contact direct avec Zenyth_V ? <a class="stream-link" href="https://discord.com/users/1077831338855497729" target="_blank" rel="noopener">Écris-lui sur Discord ↗</a>.</div>
+  </div></section>
+</main>
+<footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="live.html">Lives</a> · <a href="compte.html">Mon compte</a> · <a href="dons.html">Dons</a></span></div></footer>
+<script type="module">
+  const config = window.ZENYTH_CONFIG;
+  const status = document.getElementById("call-status");
+  const roomInput = document.getElementById("room-name");
+  const joinButton = document.getElementById("join-room");
+  const createButton = document.getElementById("create-room");
+  const copyButton = document.getElementById("copy-room");
+  const leaveButton = document.getElementById("leave-room");
+  const callGrid = document.getElementById("call-grid");
+  let supabase;
+  let livekit;
+  let room;
+  let hasSession = false;
+
+  document.querySelector("[data-year]").textContent = new Date().getFullYear();
+  const linkedRoom = new URLSearchParams(window.location.search).get("room");
+  if (linkedRoom && /^[a-zA-Z0-9_-]{3,64}$/.test(linkedRoom)) roomInput.value = linkedRoom;
+
+  function setButtons(connected) {
+    joinButton.disabled = connected || !hasSession || !supabase || !livekit || !config?.liveKitUrl;
+    createButton.disabled = connected || !hasSession || !supabase || !livekit || !config?.liveKitUrl;
+    leaveButton.disabled = !connected;
+    copyButton.disabled = !roomInput.value.trim();
+  }
+
+  function addTrack(track, identity, local = false) {
+    if (track.kind === "audio") {
+      const audio = track.attach();
+      audio.autoplay = true;
+      audio.dataset.identity = identity;
+      callGrid.append(audio);
+      return;
+    }
+    const tile = document.createElement("div");
+    tile.className = "call-tile";
+    const video = track.attach();
+    video.autoplay = true;
+    video.playsInline = true;
+    tile.append(video);
+    const label = document.createElement("span");
+    label.textContent = `${identity}${local ? " (toi)" : ""}`;
+    tile.append(label);
+    tile.dataset.identity = identity;
+    callGrid.append(tile);
+  }
+
+  function removeTrack(track) {
+    track.detach().forEach((element) => element.remove());
+    callGrid.querySelectorAll(".call-tile").forEach((tile) => {
+      if (!tile.querySelector("video")) tile.remove();
+    });
+  }
+
+  async function leaveCall() {
+    if (room) await room.disconnect();
+    room = null;
+    callGrid.replaceChildren();
+    status.textContent = "Tu as quitté la salle.";
+    setButtons(false);
+  }
+
+  async function joinCall() {
+    const roomName = roomInput.value.trim();
+    if (!/^[a-zA-Z0-9_-]{3,64}$/.test(roomName)) {
+      status.textContent = "Le code de salle doit contenir de 3 à 64 lettres, chiffres, tirets ou tirets bas.";
+      return;
+    }
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+    if (sessionError) {
+      status.textContent = `Connexion impossible : ${sessionError.message}`;
+      return;
+    }
+    if (!sessionData.session) {
+      status.textContent = "Connecte-toi pour rejoindre un appel.";
+      return;
+    }
+
+    setButtons(true);
+    status.textContent = "Préparation de la salle et demande d’accès au micro/caméra…";
+    try {
+      const { data, error } = await supabase.functions.invoke("create-livekit-token", { body: { roomName } });
+      if (error) throw error;
+      if (!data?.token) throw new Error("Le service n’a pas fourni de jeton d’appel.");
+
+      room = new livekit.Room({ adaptiveStream: true, dynacast: true });
+      room.on(livekit.RoomEvent.TrackSubscribed, (track, _publication, participant) => addTrack(track, participant.identity));
+      room.on(livekit.RoomEvent.TrackUnsubscribed, (track) => removeTrack(track));
+      room.on(livekit.RoomEvent.ParticipantDisconnected, (participant) => {
+        callGrid.querySelectorAll(`[data-identity="${CSS.escape(participant.identity)}"]`).forEach((element) => element.remove());
+      });
+      room.on(livekit.RoomEvent.Disconnected, () => {
+        room = null;
+        callGrid.replaceChildren();
+        status.textContent = "La connexion à la salle est terminée.";
+        setButtons(false);
+      });
+      await room.connect(config.liveKitUrl, data.token);
+
+      const localTracks = await livekit.createLocalTracks({ audio: true, video: { facingMode: "user" } });
+      for (const track of localTracks) {
+        await room.localParticipant.publishTrack(track);
+        addTrack(track, "Toi", true);
+      }
+      const url = new URL(window.location.href);
+      url.searchParams.set("room", roomName);
+      window.history.replaceState({}, "", url);
+      status.textContent = `Appel en cours dans la salle « ${roomName} ». Partage le lien uniquement avec tes invités.`;
+      setButtons(true);
+    } catch (error) {
+      if (room) await room.disconnect();
+      room = null;
+      callGrid.replaceChildren();
+      status.textContent = `Impossible de rejoindre l’appel : ${error.message}`;
+      setButtons(false);
+    }
+  }
+
+  createButton.addEventListener("click", () => {
+    const suffix = crypto.randomUUID().replaceAll("-", "").slice(0, 10);
+    roomInput.value = `zenyth-${suffix}`;
+    const url = new URL(window.location.href);
+    url.searchParams.set("room", roomInput.value);
+    window.history.replaceState({}, "", url);
+    setButtons(false);
+    status.textContent = "Salle créée. Partage le lien avec tes invités, puis rejoins l’appel.";
+  });
+  roomInput.addEventListener("input", () => setButtons(Boolean(room)));
+  joinButton.addEventListener("click", joinCall);
+  leaveButton.addEventListener("click", leaveCall);
+  copyButton.addEventListener("click", async () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("room", roomInput.value.trim());
+    try {
+      await navigator.clipboard.writeText(url.href);
+      status.textContent = "Lien de la salle copié.";
+    } catch (error) {
+      status.textContent = `Copie impossible : ${error.message}`;
+    }
+  });
+
+  if (!config?.supabaseUrl || !config?.supabaseAnonKey || !config?.liveKitUrl) {
+    setButtons(false);
+  } else {
+    try {
+      const [{ createClient }, livekitModule] = await Promise.all([
+        import("https://esm.sh/@supabase/supabase-js@2"),
+        import("https://cdn.jsdelivr.net/npm/livekit-client@2.15.6/dist/livekit-client.esm.mjs")
+      ]);
+      supabase = createClient(config.supabaseUrl, config.supabaseAnonKey);
+      livekit = livekitModule;
+      const { data, error } = await supabase.auth.getSession();
+      if (error) throw error;
+      hasSession = Boolean(data.session);
+      if (data.session) {
+        status.textContent = "Connecté. Crée une salle ou colle le code reçu pour rejoindre.";
+      } else {
+        status.textContent = "Connecte-toi pour créer ou rejoindre une salle.";
+      }
+      supabase.auth.onAuthStateChange((_event, session) => {
+        hasSession = Boolean(session);
+        if (!session && room) leaveCall();
+        setButtons(Boolean(room));
+        if (!room) status.textContent = session ? "Connecté. Crée une salle ou colle le code reçu pour rejoindre." : "Connecte-toi pour créer ou rejoindre une salle.";
+      });
+      setButtons(false);
+    } catch (error) {
+      status.textContent = `Service d’appel indisponible : ${error.message}`;
+      setButtons(false);
+    }
+  }
+</script>
+</body>
+</html>

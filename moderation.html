@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Espace de modération réservé aux modérateurs et au propriétaire du site ZENYTH_V.">
+  <title>Modération | ZENYTH_V Gaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="communaute.html">Communauté</a><a href="messages.html">Messages</a><a href="compte.html">Mon compte</a></nav></div></header>
+<main>
+  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // ESPACE ÉQUIPE</div><h1 class="page-title">Modération.<br><span>Communauté.</span></h1><p class="page-lede">Examine les photos, vidéos, questions et publications en attente. Seuls les comptes modérateur ou propriétaire peuvent ouvrir cet espace.</p></div></section>
+  <section class="content-section"><div class="wrap">
+    <p class="feature-status" id="moderation-status" role="status" aria-live="polite">Vérification des droits…</p>
+    <div class="moderation-tabs" role="tablist" aria-label="Contributions à examiner">
+      <button class="game-tab" type="button" role="tab" id="pending-media-tab" aria-controls="pending-media" aria-selected="true">Photos & vidéos <span id="pending-media-count">0</span></button>
+      <button class="game-tab" type="button" role="tab" id="pending-questions-tab" aria-controls="pending-questions" aria-selected="false">Questions de jeux <span id="pending-questions-count">0</span></button>
+      <button class="game-tab" type="button" role="tab" id="pending-community-tab" aria-controls="pending-community" aria-selected="false">Publications <span id="pending-community-count">0</span></button>
+    </div>
+    <section class="moderation-panel" id="pending-media" role="tabpanel" aria-labelledby="pending-media-tab"><div class="moderation-list" id="pending-media-list"><p class="game-empty">Chargement…</p></div></section>
+    <section class="moderation-panel" id="pending-questions" role="tabpanel" aria-labelledby="pending-questions-tab" hidden><div class="moderation-list" id="pending-questions-list"><p class="game-empty">Chargement…</p></div></section>
+    <section class="moderation-panel" id="pending-community" role="tabpanel" aria-labelledby="pending-community-tab" hidden><div class="moderation-list" id="pending-community-list"><p class="game-empty">Chargement…</p></div></section>
+  </div></section>
+</main>
+<footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="jeux.html">Jeux</a> · <a href="communaute.html">Communauté</a> · <a href="admin.html">Administration propriétaire</a></span></div></footer>
+<script type="module">
+  const config = window.ZENYTH_CONFIG;
+  const status = document.getElementById("moderation-status");
+  const buckets = [
+    { table: "game_media", list: "pending-media-list", count: "pending-media-count", kind: "media" },
+    { table: "game_questions", list: "pending-questions-list", count: "pending-questions-count", kind: "question" },
+    { table: "community_entries", list: "pending-community-list", count: "pending-community-count", kind: "community" }
+  ];
+  let client;
+
+  document.querySelector("[data-year]").textContent = new Date().getFullYear();
+
+  function showEmpty(list, text) {
+    const empty = document.createElement("p");
+    empty.className = "game-empty";
+    empty.textContent = text;
+    list.replaceChildren(empty);
+  }
+
+  function makeCard(row, bucket) {
+    const card = document.createElement("article");
+    card.className = "moderation-card";
+    const heading = document.createElement("div");
+    heading.className = "game-question-header";
+    const author = document.createElement("span");
+    author.textContent = row.author_name || "Membre";
+    const date = document.createElement("time");
+    date.dateTime = row.created_at;
+    date.textContent = new Date(row.created_at).toLocaleString("fr-FR");
+    heading.append(author, date);
+    card.append(heading);
+
+    if (bucket.kind === "media") {
+      const game = window.ZENYTH_GAMES.find((item) => item.slug === row.game_slug);
+      const label = document.createElement("p");
+      label.className = "moderation-game-label";
+      label.textContent = game?.name || row.game_slug;
+      card.append(label);
+      const preview = document.createElement(row.media_type === "video" ? "video" : "img");
+      if (row.media_type === "video") {
+        preview.controls = true;
+        preview.preload = "metadata";
+      } else {
+        preview.alt = row.caption;
+        preview.loading = "lazy";
+      }
+      client.storage.from("game-media").createSignedUrl(row.storage_path, 900).then(({ data, error }) => {
+        if (error) {
+          status.textContent = `Aperçu du fichier indisponible : ${error.message}`;
+          return;
+        }
+        preview.src = data.signedUrl;
+      }).catch((error) => { status.textContent = `Aperçu du fichier indisponible : ${error.message}`; });
+      card.append(preview);
+      const caption = document.createElement("p");
+      caption.textContent = row.caption;
+      card.append(caption);
+    } else {
+      const title = document.createElement("h3");
+      title.textContent = row.title;
+      const body = document.createElement("p");
+      body.textContent = row.body;
+      card.append(title, body);
+      if (bucket.kind === "community") {
+        const type = document.createElement("span");
+        type.className = "entry-type";
+        type.textContent = row.entry_type === "question" ? "Question" : "Publication";
+        card.append(type);
+      } else {
+        const game = window.ZENYTH_GAMES.find((item) => item.slug === row.game_slug);
+        const label = document.createElement("span");
+        label.className = "moderation-game-label";
+        label.textContent = game?.name || row.game_slug;
+        card.append(label);
+      }
+    }
+
+    const controls = document.createElement("div");
+    controls.className = "feature-actions";
+    for (const [value, text] of [["approved", "Approuver"], ["rejected", "Refuser"]]) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = value === "approved" ? "button" : "button secondary";
+      button.textContent = text;
+      button.addEventListener("click", () => reviewItem(row, bucket, value, card));
+      controls.append(button);
+    }
+    card.append(controls);
+    return card;
+  }
+
+  async function loadBucket(bucket) {
+    const list = document.getElementById(bucket.list);
+    const select = bucket.kind === "media"
+      ? "id, game_slug, user_id, author_name, storage_path, media_type, caption, created_at"
+      : bucket.kind === "question"
+        ? "id, game_slug, user_id, author_name, title, body, created_at"
+        : "id, user_id, author_name, entry_type, title, body, created_at";
+    const { data, error } = await client.from(bucket.table)
+      .select(select)
+      .eq("status", "pending")
+      .order("created_at", { ascending: true })
+      .limit(100);
+    if (error) throw error;
+    document.getElementById(bucket.count).textContent = String(data.length);
+    if (!data.length) {
+      showEmpty(list, "Aucune contribution en attente.");
+      return;
+    }
+    list.replaceChildren(...data.map((row) => makeCard(row, bucket)));
+  }
+
+  async function loadAll() {
+    try {
+      await Promise.all(buckets.map(loadBucket));
+      status.textContent = "Contributions en attente chargées.";
+    } catch (error) {
+      status.textContent = `Chargement impossible : ${error.message}`;
+    }
+  }
+
+  async function reviewItem(row, bucket, decision, card) {
+    card.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+    try {
+      const { data, error } = await client.from(bucket.table)
+        .update({ status: decision })
+        .eq("id", row.id)
+        .eq("status", "pending")
+        .select("id")
+        .maybeSingle();
+      if (error) throw error;
+      if (!data) throw new Error("Cette contribution a déjà été traitée ou tu n’as pas le droit de la modérer.");
+      if (bucket.kind === "media" && decision === "rejected") {
+        const { error: deleteError } = await client.storage.from("game-media").remove([row.storage_path]);
+        if (deleteError) {
+          status.textContent = `Contribution refusée, mais le fichier n’a pas pu être supprimé : ${deleteError.message}`;
+        }
+      } else {
+        status.textContent = decision === "approved" ? "Contribution publiée." : "Contribution refusée.";
+      }
+      await loadBucket(bucket);
+    } catch (error) {
+      status.textContent = `Action de modération impossible : ${error.message}`;
+      card.querySelectorAll("button").forEach((button) => { button.disabled = false; });
+    }
+  }
+
+  document.querySelectorAll("[role=tab][aria-controls]").forEach((tab) => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll("[role=tab][aria-controls]").forEach((item) => {
+        const selected = item === tab;
+        item.setAttribute("aria-selected", String(selected));
+        document.getElementById(item.getAttribute("aria-controls")).hidden = !selected;
+      });
+    });
+  });
+
+  if (!config?.supabaseUrl || !config?.supabaseAnonKey) {
+    status.textContent = "Supabase doit être configuré avant d’utiliser la modération.";
+  } else {
+    try {
+      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      client = createClient(config.supabaseUrl, config.supabaseAnonKey);
+      const { data, error } = await client.auth.getSession();
+      if (error) throw error;
+      const role = data.session?.user.app_metadata?.role;
+      if (role !== "moderator" && role !== "owner") {
+        status.textContent = "Accès réservé au compte propriétaire ou aux comptes modérateurs.";
+      } else {
+        await loadAll();
+      }
+    } catch (error) {
+      status.textContent = `Vérification des droits impossible : ${error.message}`;
+    }
+  }
+</script>
+</body>
+</html>

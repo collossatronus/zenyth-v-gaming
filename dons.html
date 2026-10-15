@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Soutiens les lives et le contenu de Zenyth_V via sa page officielle de dons Ko-fi.">
+  <title>Soutenir Zenyth_V | Dons</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="fortnite.html">Fortnite</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="appels.html">Appels</a><a href="messages.html">Messages</a><a href="dons.html" aria-current="page">Dons</a><a class="button" href="compte.html">Mon compte</a></nav></div></header>
+<main>
+  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // MERCI LA TEAM</div><h1 class="page-title">Soutiens les lives.<br><span>À ton rythme.</span></h1><p class="page-lede">Un don est entièrement facultatif. Il aide à soutenir les lives, le matériel et les prochains projets de la chaîne.</p></div></section>
+  <section class="content-section"><div class="wrap">
+    <section class="feature-card">
+      <div class="page-kicker">Dons via Ko-fi</div><h2>Un coup de pouce pour le QG.</h2>
+      <p>Les dons sont traités sur Ko-fi. Vérifie les détails et les conditions de paiement sur la page Ko-fi avant de confirmer : le site ZENYTH_V ne reçoit ni ne stocke tes informations de paiement.</p>
+      <p class="feature-status" id="donation-status" role="status" aria-live="polite">Connecte-toi pour accéder au lien de soutien. Le lien Ko-fi doit aussi être renseigné par le propriétaire du site.</p>
+      <div class="feature-actions"><a class="button feature-disabled" id="donation-link" href="compte.html" aria-disabled="true">Se connecter pour soutenir ↗</a><a class="button secondary" href="compte.html">Mon compte</a></div>
+    </section>
+    <div class="feature-note">Ne donne que si tu le souhaites et selon tes moyens. Aucun avantage ni accès spécial n’est promis en échange d’un don.</div>
+  </div></section>
+</main>
+<footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="live.html">Lives</a> · <a href="appels.html">Appels</a> · <a href="compte.html">Mon compte</a></span></div></footer>
+<script type="module">
+  const config = window.ZENYTH_CONFIG;
+  const status = document.getElementById("donation-status");
+  const donationLink = document.getElementById("donation-link");
+  document.querySelector("[data-year]").textContent = new Date().getFullYear();
+
+  function validKofiUrl(value) {
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:" && (url.hostname === "ko-fi.com" || url.hostname === "www.ko-fi.com") && url.pathname.length > 1;
+    } catch {
+      return false;
+    }
+  }
+
+  if (!config?.supabaseUrl || !config?.supabaseAnonKey) {
+    status.textContent = "La connexion doit être configurée avant d’accéder au lien de soutien.";
+  } else {
+    try {
+      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      const client = createClient(config.supabaseUrl, config.supabaseAnonKey);
+      const { data, error } = await client.auth.getSession();
+      if (error) throw error;
+
+      function updateLink(session) {
+        if (!session) {
+          donationLink.href = "compte.html";
+          donationLink.textContent = "Se connecter pour soutenir ↗";
+          donationLink.setAttribute("aria-disabled", "true");
+          donationLink.classList.add("feature-disabled");
+          status.textContent = "Connecte-toi pour afficher le lien de soutien.";
+        } else if (validKofiUrl(config.kofiUrl)) {
+          donationLink.href = config.kofiUrl;
+          donationLink.target = "_blank";
+          donationLink.rel = "noopener noreferrer";
+          donationLink.textContent = "Soutenir sur Ko-fi ↗";
+          donationLink.removeAttribute("aria-disabled");
+          donationLink.classList.remove("feature-disabled");
+          status.textContent = "Tu es connecté. Le paiement s’effectue sur le site officiel de Ko-fi.";
+        } else {
+          donationLink.href = "compte.html";
+          donationLink.textContent = "Lien Ko-fi à configurer";
+          donationLink.setAttribute("aria-disabled", "true");
+          donationLink.classList.add("feature-disabled");
+          status.textContent = "Connecté, mais le lien Ko-fi officiel n’a pas encore été configuré.";
+        }
+      }
+      updateLink(data.session);
+      client.auth.onAuthStateChange((_event, session) => updateLink(session));
+    } catch (error) {
+      status.textContent = `Vérification de la connexion impossible : ${error.message}`;
+    }
+  }
+</script>
+</body>
+</html>

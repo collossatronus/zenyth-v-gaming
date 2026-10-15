@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Crée ton compte Zenyth_V avec ton adresse email ou Discord, puis personnalise l’ambiance du site.">
+  <title>Mon compte | ZENYTH_V Gaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="fortnite.html">Fortnite</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="appels.html">Appels</a><a href="messages.html">Messages</a><a href="dons.html">Dons</a><a class="button" href="compte.html" aria-current="page">Mon compte</a></nav></div></header>
+<main>
+  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // TON ESPACE</div><h1 class="page-title">Ton compte.<br><span>Ton ambiance.</span></h1><p class="page-lede">Connecte-toi par email ou Discord pour accéder aux appels et aux dons. Choisis aussi l’ambiance de fond qui te suivra sur le site.</p></div></section>
+  <section class="content-section"><div class="wrap account-panel">
+    <section class="feature-card" aria-labelledby="auth-title">
+      <div class="page-kicker">Connexion sécurisée</div><h2 id="auth-title">Entre dans le QG.</h2>
+      <form class="feature-form" id="auth-form">
+        <label>Email<input id="account-email" type="email" autocomplete="email" required></label>
+        <label>Mot de passe<input id="account-password" type="password" autocomplete="current-password" minlength="8" required></label>
+        <div class="feature-actions"><button class="button" type="submit" id="email-sign-in">Se connecter</button><button class="button secondary" type="button" id="email-sign-up">Créer mon compte</button></div>
+      </form>
+      <div class="feature-actions"><button class="button secondary" type="button" id="discord-sign-in">Continuer avec Discord</button><button class="button secondary" type="button" id="sign-out" hidden>Se déconnecter</button></div>
+      <p class="feature-status" id="auth-status" role="status" aria-live="polite">Le service de connexion doit être configuré avant la création de comptes.</p>
+      <div class="feature-actions"><a class="button secondary" id="admin-link" href="admin.html" hidden>Ouvrir le panneau propriétaire</a><a class="button secondary" id="moderation-link" href="moderation.html" hidden>Ouvrir la modération</a><a class="button secondary" href="messages.html">Messages privés</a></div>
+    </section>
+    <section class="feature-card" aria-labelledby="background-title">
+      <div class="page-kicker">Profil visuel</div><h2 id="background-title">Choisis ton fond.</h2>
+      <p>Ton choix est enregistré sur cet appareil. Une fois connecté, il est aussi rattaché à ton compte.</p>
+      <fieldset style="border:0;padding:0;margin:0">
+        <legend class="page-kicker" style="margin-bottom:12px">Ambiance du site</legend>
+        <div class="account-theme-options">
+          <label><input type="radio" name="background" value="electric"><span class="theme-swatch"></span>Électrique</label>
+          <label><input type="radio" name="background" value="aurora"><span class="theme-swatch theme-swatch--aurora"></span>Aurore</label>
+          <label><input type="radio" name="background" value="violet"><span class="theme-swatch theme-swatch--violet"></span>Violet</label>
+        </div>
+      </fieldset>
+      <p class="feature-status" id="background-status" role="status" aria-live="polite"></p>
+    </section>
+  </div></section>
+</main>
+<footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="live.html">Lives</a> · <a href="appels.html">Appels</a> · <a href="dons.html">Dons</a></span></div></footer>
+<script type="module">
+  const config = window.ZENYTH_CONFIG;
+  const authForm = document.getElementById("auth-form");
+  const authStatus = document.getElementById("auth-status");
+  const signOutButton = document.getElementById("sign-out");
+  const adminLink = document.getElementById("admin-link");
+  const moderationLink = document.getElementById("moderation-link");
+  const themeStatus = document.getElementById("background-status");
+  const backgroundKey = "zenyth-v-background";
+  let client;
+  let currentSession;
+  let currentBackground = "electric";
+
+  document.querySelector("[data-year]").textContent = new Date().getFullYear();
+
+  try {
+    const savedBackground = localStorage.getItem(backgroundKey);
+    if (["electric", "aurora", "violet"].includes(savedBackground)) currentBackground = savedBackground;
+  } catch {
+    themeStatus.textContent = "Le navigateur ne permet pas de mémoriser ce choix.";
+  }
+  document.querySelectorAll('input[name="background"]').forEach((input) => {
+    input.checked = input.value === currentBackground;
+    input.addEventListener("change", async () => {
+      currentBackground = input.value;
+      try {
+        localStorage.setItem(backgroundKey, currentBackground);
+      } catch {
+        themeStatus.textContent = "Le navigateur ne permet pas d’enregistrer ce fond.";
+        return;
+      }
+      window.zenythApplyBackground?.(currentBackground);
+      if (currentSession) {
+        try {
+          const { error } = await client.auth.updateUser({ data: { site_background: currentBackground } });
+          themeStatus.textContent = error ? `Fond gardé sur cet appareil. Synchronisation impossible : ${error.message}` : "Fond enregistré sur cet appareil et dans ton compte.";
+        } catch (error) {
+          themeStatus.textContent = `Fond gardé sur cet appareil. Synchronisation impossible : ${error.message}`;
+        }
+      } else {
+        themeStatus.textContent = "Fond enregistré sur cet appareil. Connecte-toi pour le synchroniser sur ton compte.";
+      }
+    });
+  });
+
+  function showSession(session) {
+    currentSession = session;
+    signOutButton.hidden = !session;
+    adminLink.hidden = session?.user.app_metadata?.role !== "owner";
+    moderationLink.hidden = !["owner", "moderator"].includes(session?.user.app_metadata?.role);
+    document.getElementById("email-sign-in").disabled = Boolean(session);
+    document.getElementById("email-sign-up").disabled = Boolean(session);
+    document.getElementById("discord-sign-in").disabled = Boolean(session);
+    if (!session) {
+      authStatus.textContent = "Connecte-toi par email ou Discord. Les appels sont réservés aux comptes connectés.";
+      return;
+    }
+    authStatus.textContent = `Connecté : ${session.user.email || session.user.user_metadata?.full_name || "compte Discord"}.`;
+    const profileBackground = session.user.user_metadata?.site_background;
+    if (["electric", "aurora", "violet"].includes(profileBackground)) {
+      currentBackground = profileBackground;
+      window.zenythApplyBackground?.(profileBackground);
+      document.querySelector(`input[name="background"][value="${profileBackground}"]`).checked = true;
+      try {
+        localStorage.setItem(backgroundKey, profileBackground);
+      } catch {
+        themeStatus.textContent = "Fond synchronisé au compte, mais le navigateur ne permet pas la copie locale.";
+      }
+    }
+  }
+
+  if (!config?.supabaseUrl || !config?.supabaseAnonKey) {
+    authForm.querySelectorAll("button").forEach((button) => { button.disabled = true; });
+    document.getElementById("discord-sign-in").disabled = true;
+  } else {
+    try {
+      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+      client = createClient(config.supabaseUrl, config.supabaseAnonKey);
+      const { data, error } = await client.auth.getSession();
+      if (error) throw error;
+      showSession(data.session);
+      client.auth.onAuthStateChange((_event, session) => showSession(session));
+    } catch (error) {
+      authStatus.textContent = `Connexion indisponible : ${error.message}`;
+    }
+  }
+
+  authForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!client) return;
+    authStatus.textContent = "Connexion en cours…";
+    try {
+      const { error } = await client.auth.signInWithPassword({
+        email: document.getElementById("account-email").value.trim(),
+        password: document.getElementById("account-password").value
+      });
+      authStatus.textContent = error ? `Connexion impossible : ${error.message}` : "Connexion réussie.";
+    } catch (error) {
+      authStatus.textContent = `Connexion impossible : ${error.message}`;
+    }
+  });
+
+  document.getElementById("email-sign-up").addEventListener("click", async () => {
+    if (!client || !authForm.reportValidity()) return;
+    authStatus.textContent = "Création du compte en cours…";
+    try {
+      const { data, error } = await client.auth.signUp({
+        email: document.getElementById("account-email").value.trim(),
+        password: document.getElementById("account-password").value,
+        options: { emailRedirectTo: window.location.href.split("?")[0] }
+      });
+      authStatus.textContent = error ? `Création impossible : ${error.message}` : data.session ? "Compte créé et connecté." : "Compte créé. Confirme ton adresse email avec le lien reçu.";
+    } catch (error) {
+      authStatus.textContent = `Création impossible : ${error.message}`;
+    }
+  });
+
+  document.getElementById("discord-sign-in").addEventListener("click", async () => {
+    if (!client) return;
+    try {
+      const { error } = await client.auth.signInWithOAuth({
+        provider: "discord",
+        options: { redirectTo: window.location.href.split("?")[0] }
+      });
+      if (error) authStatus.textContent = `Connexion Discord impossible : ${error.message}`;
+    } catch (error) {
+      authStatus.textContent = `Connexion Discord impossible : ${error.message}`;
+    }
+  });
+
+  signOutButton.addEventListener("click", async () => {
+    if (!client) return;
+    try {
+      const { error } = await client.auth.signOut();
+      authStatus.textContent = error ? `Déconnexion impossible : ${error.message}` : "Tu es déconnecté.";
+    } catch (error) {
+      authStatus.textContent = `Déconnexion impossible : ${error.message}`;
+    }
+  });
+</script>
+</body>
+</html>

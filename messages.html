@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Espace privé de messagerie de la communauté ZENYTH_V.">
+  <title>Messages privés | ZENYTH_V Gaming</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <link rel="stylesheet" href="assets/css/features.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+  <script type="module" src="assets/js/private-messages.js"></script>
+</head>
+<body>
+<header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="live.html">Lives</a><a href="communaute.html">Communauté</a><a href="appels.html">Appels</a><a href="messages.html" aria-current="page">Messages</a><a class="button" href="compte.html">Mon compte</a></nav></div></header>
+<main>
+  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // ESPACE PRIVÉ</div><h1 class="page-title">Tes messages.<br><span>En privé.</span></h1><p class="page-lede">Les messages ne sont visibles que par toi et l’autre participant. Tu peux bloquer un compte pour fermer l’accès à votre conversation.</p></div></section>
+  <section class="content-section"><div class="wrap">
+    <section class="feature-card">
+      <div class="private-message-actions"><button class="button" id="start-to-creator" type="button">Écrire à Zenyth_V</button><form class="private-recipient-form" id="start-recipient-form"><label for="recipient-id">Écrire à un membre avec son identifiant de compte<input id="recipient-id" type="text" autocomplete="off" placeholder="UUID du membre" pattern="[0-9a-fA-F-]{36}" disabled required></label><button class="button secondary" type="submit">Nouvelle conversation</button></form><button class="button secondary" id="toggle-blocked" type="button" hidden>Comptes bloqués</button></div>
+      <section class="blocked-accounts" id="blocked-panel" hidden aria-label="Comptes bloqués"><h2>Comptes bloqués</h2><div id="blocked-list"></div></section>
+      <p class="feature-status" id="messages-status" role="status" aria-live="polite">Chargement de la messagerie privée…</p>
+      <a class="button secondary" id="messages-login-prompt" href="compte.html">Connecte-toi pour voir tes messages</a>
+      <div class="private-messaging-layout">
+        <aside class="conversation-sidebar" aria-label="Conversations">
+          <h2>Conversations</h2><div id="conversation-list"><p class="game-empty">Chargement…</p></div>
+        </aside>
+        <section class="private-thread" aria-label="Conversation sélectionnée">
+          <div class="private-thread-heading"><h2 id="recipient-name">Choisis une conversation</h2><button class="button secondary" id="block-member" type="button" hidden>Bloquer</button></div>
+          <div class="private-thread-messages" id="message-list" aria-live="polite"><p class="game-empty">Aucun message sélectionné.</p></div>
+          <form class="private-compose" id="message-form"><label class="visually-hidden" for="message-body">Ton message privé</label><textarea id="message-body" maxlength="2000" rows="3" placeholder="Écris un message (2 000 caractères maximum)" required disabled></textarea><button class="button" type="submit" disabled>Envoyer</button></form>
+        </section>
+      </div>
+    </section>
+    <div class="feature-note">Les messages sont accessibles uniquement aux deux participants et ne sont pas publics dans le fil communautaire. N’envoie pas d’informations sensibles. Tu peux bloquer l’autre compte à tout moment.</div>
+  </div></section>
+</main>
+<footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="communaute.html">Communauté</a> · <a href="appels.html">Appels</a> · <a href="compte.html">Mon compte</a></span></div></footer>
+</body>
+</html>
