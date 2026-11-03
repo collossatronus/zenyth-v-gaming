@@ -1,7 +1,4 @@
 window.ZENYTH_CONFIG = {
-  supabaseUrl: "",
-  supabaseAnonKey: "",
-  liveKitUrl: "",
-  creatorUserId: "",
-  kofiUrl: ""
+  // Configure this with the deployed server's WebSocket URL (wss://...).
+  roomServerUrl: ""
 };
