@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071426">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Crée un salon privé par code pour discuter et appeler tes amis.">
-  <title>Appels communautaires | ZENYTH_V Gaming</title>
+  <meta name="description" content="Rejoins le serveur Discord ZENYTH_V pour discuter et retrouver la communauté en vocal.">
+  <title>Appels Discord | ZENYTH_V Gaming</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/sections.css">
@@ -17,251 +17,19 @@
 <body>
 <header class="sitebar"><div class="wrap site-nav"><a class="brand" href="index.html">ZENYTH<span>_V</span></a><nav class="nav-menu" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="jeux.html">Jeux</a><a href="fortnite.html">Fortnite</a><a href="live.html">Lives</a><a href="outils.html">Outils</a><a href="communaute.html">Communauté</a><a href="appels.html" aria-current="page">Appels</a><a href="messages.html">Messages</a><a href="dons.html">Dons</a><a class="button" href="compte.html">Mon compte</a></nav></div></header>
 <main>
-  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // SALON PRIVÉ</div><h1 class="page-title">On se retrouve.<br><span>En direct.</span></h1><p class="page-lede">Crée une salle, partage son code, et tes amis te rejoignent sans compte ni mot de passe.</p></div></section>
+  <section class="page-hero"><div class="wrap"><div class="page-kicker">ZENYTH_V // DISCORD</div><h1 class="page-title">On se retrouve.<br><span>En vocal.</span></h1><p class="page-lede">Rejoins le serveur Discord de la communauté pour discuter et participer aux appels vocaux.</p></div></section>
   <section class="content-section"><div class="wrap">
     <section class="feature-card">
-      <div class="page-kicker">Appel et messages par code</div><h2>Crée ou rejoins un salon.</h2>
-      <p>Crée une salle en un clic ou saisis le code reçu pour rejoindre l’appel et le chat. Aucun compte ni mot de passe n’est nécessaire. Le navigateur demandera l’accès au micro et à la caméra.</p>
-      <p class="feature-status" id="call-access-status" role="status" aria-live="polite">Connexion au serveur de salons…</p>
-      <div class="feature-form">
-        <label for="room-code">Code de la salle (facultatif à la création)<input id="room-code" maxlength="32" minlength="4" autocomplete="off" placeholder="Code reçu ou code de ton choix"></label>
-        <div class="feature-actions">
-          <button class="button secondary" id="create-room" type="button">Créer une salle</button>
-          <button class="button" id="join-room" type="button" disabled>Rejoindre avec le code</button>
-          <button class="button secondary" id="copy-room" type="button" disabled>Copier le code</button>
-          <button class="button secondary" id="leave-room" type="button" disabled>Quitter le salon</button>
-        </div>
-        <p class="feature-status" id="call-status" role="status" aria-live="polite">Crée une salle ou saisis le code de la salle à rejoindre.</p>
+      <div class="page-kicker">Serveur communautaire</div><h2>Rejoins-nous sur Discord.</h2>
+      <p>Les appels vocaux se déroulent dans Discord. Rejoins le serveur, puis ouvre le salon vocal pour discuter avec la communauté. Tu peux utiliser l’application Discord ou son site web.</p>
+      <div class="feature-actions">
+        <a class="button" href="https://discord.gg/F7QkEWK3n" target="_blank" rel="noopener noreferrer">Rejoindre le serveur Discord ↗</a>
+        <a class="button secondary" href="https://discord.com/channels/1077835321946943508/1077835321946943510" target="_blank" rel="noopener noreferrer">Ouvrir le salon Discord ↗</a>
       </div>
-      <div class="call-grid" id="call-grid" aria-live="polite"></div>
     </section>
-    <div class="feature-note">Le serveur conserve les salons et les 100 derniers messages en mémoire; ils disparaissent quand tout le monde quitte le salon ou quand le serveur redémarre. Les appels vidéo directs dépendent des routeurs et réseaux utilisés; certains bloquent les connexions entre participants.</div>
+    <div class="feature-note">Le salon vocal et ses permissions sont gérés par Discord. Il faut rejoindre le serveur et disposer de l’application ou d’un navigateur compatible pour participer à un appel.</div>
   </div></section>
 </main>
 <footer class="page-footer"><div class="wrap footer-row"><span>© <span data-year></span> ZENYTH_V GAMING</span><span><a href="live.html">Lives</a> · <a href="messages.html">Messages</a> · <a href="dons.html">Dons</a></span></div></footer>
-<script type="module">
-  import RoomClient from "./assets/js/room-client.js";
-
-  const config = window.ZENYTH_CONFIG;
-  const status = document.getElementById("call-status");
-  const accessStatus = document.getElementById("call-access-status");
-  const roomInput = document.getElementById("room-code");
-  const createButton = document.getElementById("create-room");
-  const joinButton = document.getElementById("join-room");
-  const copyButton = document.getElementById("copy-room");
-  const leaveButton = document.getElementById("leave-room");
-  const callGrid = document.getElementById("call-grid");
-  const peers = new Map();
-  const roomCodeAlphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let roomClient;
-  let localStream;
-  let currentRoom;
-  let joining = false;
-
-  document.querySelector("[data-year]").textContent = new Date().getFullYear();
-  const linkedCode = new URLSearchParams(window.location.search).get("room");
-  if (linkedCode) roomInput.value = linkedCode.toUpperCase();
-
-  function generateRoomCode() {
-    const values = crypto.getRandomValues(new Uint32Array(8));
-    const code = [...values].map((value) => roomCodeAlphabet[value % roomCodeAlphabet.length]).join("");
-    return `${code.slice(0, 4)}-${code.slice(4)}`;
-  }
-
-  function setButtons() {
-    const active = Boolean(currentRoom);
-    createButton.disabled = joining || active;
-    joinButton.disabled = joining || active || !roomInput.value.trim();
-    roomInput.disabled = joining || active;
-    copyButton.disabled = !active;
-    leaveButton.disabled = !active;
-  }
-
-  function addVideoTile(identity, stream, muted) {
-    const tile = document.createElement("div");
-    tile.className = "call-tile";
-    tile.dataset.identity = identity;
-    const video = document.createElement("video");
-    video.autoplay = true;
-    video.playsInline = true;
-    video.muted = muted;
-    video.srcObject = stream;
-    tile.append(video);
-    const label = document.createElement("span");
-    label.textContent = identity === "local" ? "Toi" : `Ami-${identity.slice(0, 5)}`;
-    tile.append(label);
-    callGrid.append(tile);
-    if (!muted) video.play().catch(() => {
-      status.textContent = "Autorise la lecture du son ou de la vidéo de ton correspondant.";
-    });
-  }
-
-  function waitForIceGathering(connection) {
-    if (connection.iceGatheringState === "complete") return Promise.resolve();
-    return new Promise((resolve, reject) => {
-      const timeout = window.setTimeout(() => {
-        connection.removeEventListener("icegatheringstatechange", onStateChange);
-        reject(new Error("La collecte des informations réseau a expiré."));
-      }, 20000);
-      function onStateChange() {
-        if (connection.iceGatheringState !== "complete") return;
-        window.clearTimeout(timeout);
-        connection.removeEventListener("icegatheringstatechange", onStateChange);
-        resolve();
-      }
-      connection.addEventListener("icegatheringstatechange", onStateChange);
-    });
-  }
-
-  function createPeer(memberId) {
-    if (peers.has(memberId)) return peers.get(memberId);
-    const connection = new RTCPeerConnection({ iceServers: [] });
-    peers.set(memberId, connection);
-    localStream.getTracks().forEach((track) => connection.addTrack(track, localStream));
-    connection.addEventListener("track", (event) => {
-      const stream = event.streams[0] || new MediaStream([event.track]);
-      const existing = callGrid.querySelector(`[data-identity="${CSS.escape(memberId)}"]`);
-      if (existing) {
-        existing.querySelector("video").srcObject = stream;
-      } else {
-        addVideoTile(memberId, stream, false);
-      }
-    });
-    connection.addEventListener("connectionstatechange", () => {
-      if (!peers.has(memberId)) return;
-      if (connection.connectionState === "connected") {
-        status.textContent = `Appel connecté dans le salon « ${currentRoom} ».`;
-      } else if (connection.connectionState === "failed") {
-        status.textContent = "Connexion directe impossible entre ces réseaux. Vérifie les paramètres réseau des participants.";
-      }
-    });
-    return connection;
-  }
-
-  async function sendOffer(memberId) {
-    const connection = createPeer(memberId);
-    const offer = await connection.createOffer();
-    await connection.setLocalDescription(offer);
-    await waitForIceGathering(connection);
-    roomClient.signal(memberId, { description: connection.localDescription });
-  }
-
-  async function handleSignal(event) {
-    const { fromId, signal } = event.detail;
-    try {
-      const connection = createPeer(fromId);
-      if (signal.description?.type === "offer") {
-        await connection.setRemoteDescription(signal.description);
-        const answer = await connection.createAnswer();
-        await connection.setLocalDescription(answer);
-        await waitForIceGathering(connection);
-        roomClient.signal(fromId, { description: connection.localDescription });
-      } else if (signal.description?.type === "answer" && connection.signalingState === "have-local-offer") {
-        await connection.setRemoteDescription(signal.description);
-      }
-    } catch (error) {
-      status.textContent = `Impossible d’établir l’appel : ${error.message}`;
-    }
-  }
-
-  async function leaveRoom(message = "Tu as quitté le salon.") {
-    const previousClient = roomClient;
-    roomClient = null;
-    currentRoom = null;
-    for (const connection of peers.values()) connection.close();
-    peers.clear();
-    localStream?.getTracks().forEach((track) => track.stop());
-    localStream = null;
-    callGrid.replaceChildren();
-    previousClient?.leave();
-    previousClient?.close();
-    const url = new URL(window.location.href);
-    url.searchParams.delete("room");
-    window.history.replaceState({}, "", url);
-    status.textContent = message;
-    setButtons();
-  }
-
-  async function enterRoom(create) {
-    const code = (create && !roomInput.value.trim() ? generateRoomCode() : roomInput.value.trim()).toUpperCase();
-    if (!/^[A-Z0-9_-]{4,32}$/.test(code)) {
-      status.textContent = "Le code doit contenir de 4 à 32 lettres, chiffres, tirets ou tirets bas.";
-      return;
-    }
-    roomInput.value = code;
-    if (!config?.roomServerUrl) {
-      accessStatus.textContent = "Le service d’appel du site n’est pas encore mis en ligne. Aucun compte n’est nécessaire pour les participants.";
-      return;
-    }
-    if (!navigator.mediaDevices?.getUserMedia || !window.RTCPeerConnection) {
-      status.textContent = "Utilise un navigateur compatible sur une page HTTPS pour démarrer l’appel.";
-      return;
-    }
-
-    joining = true;
-    setButtons();
-    status.textContent = "Connexion à la salle et demande d’accès au micro/caméra…";
-    try {
-      const client = new RoomClient(config.roomServerUrl);
-      roomClient = client;
-      client.addEventListener("member_joined", (event) => {
-        sendOffer(event.detail.member.id).catch((error) => {
-          status.textContent = `Impossible de lancer l’appel : ${error.message}`;
-        });
-      });
-      client.addEventListener("member_left", (event) => {
-        peers.get(event.detail.memberId)?.close();
-        peers.delete(event.detail.memberId);
-        callGrid.querySelectorAll(`[data-identity="${CSS.escape(event.detail.memberId)}"]`).forEach((tile) => tile.remove());
-        status.textContent = "Une personne a quitté le salon.";
-      });
-      client.addEventListener("signal", handleSignal);
-      client.addEventListener("room_expired", () => leaveRoom("Ce salon a expiré. Crée un nouveau salon."));
-      client.addEventListener("closed", () => {
-        if (roomClient === client) leaveRoom("La connexion au serveur est interrompue.");
-      });
-      client.addEventListener("error", (event) => {
-        status.textContent = `Erreur du serveur : ${event.detail.message}`;
-      });
-      localStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-      const membership = create ? await client.createRoom(code) : await client.joinRoom(code);
-      currentRoom = membership.roomCode;
-      roomInput.value = currentRoom;
-      addVideoTile("local", localStream, true);
-      const url = new URL(window.location.href);
-      url.searchParams.set("room", currentRoom);
-      window.history.replaceState({}, "", url);
-      status.textContent = `Salon « ${currentRoom} » prêt. Partage le code pour démarrer l’appel et le chat.`;
-      setButtons();
-    } catch (error) {
-      await leaveRoom();
-      status.textContent = `Impossible de rejoindre le salon : ${error.message}`;
-    } finally {
-      joining = false;
-      setButtons();
-    }
-  }
-
-  createButton.addEventListener("click", () => enterRoom(true));
-  joinButton.addEventListener("click", () => enterRoom(false));
-  roomInput.addEventListener("input", setButtons);
-  leaveButton.addEventListener("click", () => leaveRoom());
-  copyButton.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(roomInput.value.trim().toUpperCase());
-      status.textContent = "Code copié. Partage-le avec tes amis.";
-    } catch (error) {
-      status.textContent = `Copie impossible : ${error.message}. Sélectionne le code et copie-le manuellement.`;
-    }
-  });
-
-  if (config?.roomServerUrl) {
-    accessStatus.textContent = "Aucun compte requis. Crée une salle ou saisis le code reçu.";
-    if (linkedCode) enterRoom(false);
-  } else {
-    accessStatus.textContent = "Le service d’appel doit être mis en ligne une fois par le propriétaire du site. Les participants n’ont rien à configurer.";
-  }
-  setButtons();
-</script>
 </body>
 </html>
